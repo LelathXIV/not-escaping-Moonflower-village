@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd34bfe6214d3014d9a94b89d68bfca3, type: 3}
+  m_Name: revolver_weapon
+  m_EditorClassIdentifier: 
+  prefabForInventory: {fileID: 2912398922761620072, guid: 21822f24cede6dd41b3af5eb19ba8ed4, type: 3}
+  prefabForScene: {fileID: 613644869108775753, guid: 2a59b1a6c0f21f74e8630029a65d9f19, type: 3}
+  type: 2
+  ID: 1
+  itemName: Revolver
+  description: 
+  sellPrice: 25
+  buyPrice: 500
+  damageValue: 15
+  reloadSpeed: 10
+  bulletType: {fileID: 19026177839507540, guid: b7ae10a17e67dc74eade85509a3d702f, type: 3}
+  bulletStootDelay: 2
+  healingPotential: 0
