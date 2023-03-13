@@ -163,7 +163,6 @@ Transform:
   - {fileID: 581468218820794115}
   - {fileID: 4400553240468251660}
   - {fileID: 389753973997409094}
-  - {fileID: 719983904675170930}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -312,6 +311,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78042619619493149bcd5d262831ff54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meleeAttac: {fileID: 0}
+  meleeWeaponSlot: {fileID: 0}
 --- !u!1 &2595363092677991612
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,51 +670,6 @@ Transform:
   m_Father: {fileID: 2599642476379393436}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7119984285273761800
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 719983904675170930}
-  - component: {fileID: 7701682405782974827}
-  m_Layer: 0
-  m_Name: actionCollider
-  m_TagString: Player
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &719983904675170930
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7119984285273761800}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.8999996, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 581468219236073970}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &7701682405782974827
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7119984285273761800}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.29
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3824701789460983846
 PrefabInstance:
   m_ObjectHideFlags: 0

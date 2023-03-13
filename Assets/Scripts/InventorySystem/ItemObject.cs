@@ -18,6 +18,7 @@ public enum ItemType
 public abstract class ItemObject : ScriptableObject
 {
     public GameObject prefabForInventory;
+    public Sprite itemImage;
     public ItemType type;
 
     public string itemName;

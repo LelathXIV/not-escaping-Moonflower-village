@@ -11,16 +11,9 @@ public class InventoryItemAction : MonoBehaviour
     private GameObject darkeningPanel;
     private GameObject itemDescriptionPrefab;
     private string itemStatsText;
-
     private Transform useObjectButton;
     private string contextButtontext;
-    private Transform destroyObjectButton;
-    private string destroyItemText;
-    private Button yesDestroyButton;
-    private Button noDestroyButton;
-    private Transform confirmDestroyPanel;
-
-    private GameObject player;
+    private Camera currentlyActiveCamera;
 
     private void Awake()
     {
@@ -28,12 +21,12 @@ public class InventoryItemAction : MonoBehaviour
         btn.onClick.AddListener(ActionOnClick);
         darkeningPanel = Resources.Load("Prefabs/PanelsPrefabs/DarkeningPanel") as GameObject;
         itemDescriptionPrefab = Resources.Load("Prefabs/PanelsPrefabs/ObjectContextPanel") as GameObject;
+        currentlyActiveCamera = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().activeCamera;
     }
 
     public void Start()
     {
         playerInventory = Resources.Load("PlayerInventory") as InventoryObject;
-        player = GameObject.FindGameObjectWithTag("Player");
 
         for (int i = 0; i < playerInventory.Container.Count; i++)
         {
@@ -48,7 +41,7 @@ public class InventoryItemAction : MonoBehaviour
     public void ActionOnClick()
     {
         //pause game - bug?
-        var parent = Instantiate(darkeningPanel, this.transform.parent.transform.parent.transform.parent.transform);
+        var parent = Instantiate(darkeningPanel, this.transform.parent.transform.parent.transform.parent.transform); //adapt it later
         parent.transform.SetAsLastSibling();
         parent.transform.position = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0);
 
@@ -59,29 +52,20 @@ public class InventoryItemAction : MonoBehaviour
         contextMenuPrefab.transform.Find("objectLoreName").GetComponent<TextMeshProUGUI>().text = item.itemName;
 
         SwitchTexts();
-        destroyItemText = "throw away".ToString();
 
         contextMenuPrefab.transform.Find("objectMainStats").GetComponent<TextMeshProUGUI>().text = itemStatsText;
         contextMenuPrefab.transform.Find("objectLoreDescription").GetComponent<TextMeshProUGUI>().text = item.description;
-
-        confirmDestroyPanel = contextMenuPrefab.transform.Find("confirmDestroy");
-        confirmDestroyPanel.transform.Find("text").GetComponent<TextMeshProUGUI>().text = "Are you sure you" + "\n" + "want to destroy " + item.itemName + "?";
-        yesDestroyButton = confirmDestroyPanel.transform.Find("yes").GetComponent<Button>();
-        noDestroyButton = confirmDestroyPanel.transform.Find("no").GetComponent<Button>();
 
         useObjectButton = contextMenuPrefab.transform.Find("UseObjectButton");
         useObjectButton.transform.Find("Text").GetComponent<TextMeshProUGUI>().text = contextButtontext;
         useObjectButton.gameObject.GetComponent<Button>().onClick.AddListener(UseObject);
 
-        destroyObjectButton = contextMenuPrefab.transform.Find("DestroyObject");
-        destroyObjectButton.transform.Find("Text").GetComponent<TextMeshProUGUI>().text = destroyItemText;
-        destroyObjectButton.gameObject.GetComponent<Button>().onClick.AddListener(DestroyObject);
 
+        //inactivate UseObject for quest items e.t.c
     }
 
     private void UseObject()
     {
-        //разделить на кейсы!! хилит/эквип и пр
         switch (item.type)
         {
             case ItemType.weapon:
@@ -93,27 +77,8 @@ public class InventoryItemAction : MonoBehaviour
                 GameObject.FindGameObjectWithTag("meleeWeaponSlot").GetComponent<MeleeWeaponSlot>().AssignWeapon(item);
                 Destroy(useObjectButton.gameObject.transform.parent.transform.parent.gameObject);
                 break;
-
         }
-    }
-
-    private void DestroyObject()
-    {
-        confirmDestroyPanel.gameObject.SetActive(true);
-        yesDestroyButton.onClick.AddListener(YesDestroy);
-        noDestroyButton.onClick.AddListener(NoDestroy);
-    }
-
-    private void YesDestroy()
-    {
-        playerInventory.RemoveItem(item, int.MaxValue);
-        confirmDestroyPanel.transform.parent.transform.parent.gameObject.SetActive(false);
-        Destroy(this.gameObject);
-    }
-
-    private void NoDestroy()
-    {
-        confirmDestroyPanel.gameObject.SetActive(false);
+        useObjectButton.gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
     }
 
     private void SwitchTexts()
@@ -144,7 +109,9 @@ public class InventoryItemAction : MonoBehaviour
                 //description
                 break;
             case ItemType.questObject:
-                //description
+                itemStatsText = ("Opens ancient chests"
+                                 ).ToString();
+                contextButtontext = "Use";
                 break;
             case ItemType.document:
                 //description

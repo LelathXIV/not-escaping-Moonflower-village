@@ -177,7 +177,7 @@ public class AncientLock_MiniGame : MonoBehaviour
         }
     }
 
-    public void StartAncientLockMG()
+    public void StartMG()
     {
         foreach (GameObject indicator in progressIndicators)
         {

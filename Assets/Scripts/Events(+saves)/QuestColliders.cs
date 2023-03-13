@@ -2,9 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.HID;
+using UnityEngine.UI;
 
 public class QuestColliders : MonoBehaviour
 {
+    public GameObject targetObject; //with what object this collider should interact
+    public ScriptableObject expectedItem; //key item to start action
+    public bool expectedItemUsed; //is this action already finished
+    public List<string> hints; //on click texts
+
     private void Start()
     {
         for (int i = 0; i < SaveGameManager.CurrentSaveData._questCollidersSaveDatas.Count; i++)
@@ -15,17 +21,13 @@ public class QuestColliders : MonoBehaviour
         }
     }
 
-    public GameObject targetObject; //with what object this collider should interact
-    public ScriptableObject expectedItem; //key item to start action
-    public bool expectedItemUsed; //is this action already finished
-    public List<string> hints; //on click texts
-
     public void KeyItemUsed()
     {
         expectedItemUsed = true;
         SaveQuestColliderData();
         Destroy(transform.gameObject);
     }
+
     public void SaveQuestColliderData()
     {
         var QuestCollidersSaveData = new QuestCollidersSaveData();

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: revolver_bullet
   m_EditorClassIdentifier: 
   prefabForInventory: {fileID: 2912398922761620072, guid: fcf893eb1de9c644eb669619054a8e9a, type: 3}
+  itemImage: {fileID: 21300000, guid: dc3e66872e2dd4b4c8cc207302fdcf47, type: 3}
   type: 0
-  ID: 2
   itemName: Revolver Bullet
   description: 
   sellPrice: 0
@@ -26,3 +26,5 @@ MonoBehaviour:
   reloadSpeed: 0
   bulletStootDelay: 0
   magazineCapacity: 0
+  aimingTime: 0
+  weaponRange: 0

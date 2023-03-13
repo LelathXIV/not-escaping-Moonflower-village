@@ -41,6 +41,5 @@ public class TakeItem_ContextButton : MonoBehaviour
         }
         itemsToCollect.Clear();
         ContextImag_TakeItem.gameObject.SetActive(false);
-        GetComponent<PlayerSaveEvents>().SaveInventory();
     }
 }

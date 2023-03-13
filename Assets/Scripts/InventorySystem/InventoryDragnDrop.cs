@@ -66,7 +66,7 @@ public class InventoryDragnDrop : MonoBehaviour, IPointerDownHandler, IBeginDrag
             Debug.Log("start mini game");
             if(GetComponent<InventoryItemAction>().item.itemName == "ancient_key")
             {
-                targetObject.targetObject.GetComponent<AncientLock_MiniGame>().StartAncientLockMG();
+               // targetObject.targetObject.GetComponent<AncientLock_MiniGame>().StartAncientLockMG();
                 targetObject.KeyItemUsed();
                 player.GetComponent<PlayerSaveEvents>().inventory.RemoveItem(thisItem, 1);
             }

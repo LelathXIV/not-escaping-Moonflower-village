@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ancient_key
   m_EditorClassIdentifier: 
   prefabForInventory: {fileID: 2912398922761620072, guid: ae8412d6c5a64ae45ab255636b2171c5, type: 3}
+  itemImage: {fileID: 21300000, guid: 02800fb9cff14da47a04572790384d8b, type: 3}
   type: 6
   itemName: ancient_key
   description: 

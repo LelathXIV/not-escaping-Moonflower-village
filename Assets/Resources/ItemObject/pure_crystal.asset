@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: pure_crystal
   m_EditorClassIdentifier: 
   prefabForInventory: {fileID: 2912398922761620072, guid: cdc2ff8a753e6d14b8c915eecbaf0db6, type: 3}
-  prefabForScene: {fileID: 3406179361151115306, guid: 44a630908ebb4e349a0484eb2a7542ac, type: 3}
-  type: 5
-  ID: 4
+  itemImage: {fileID: 21300000, guid: ad4dcac393f63f3468f6d9ff1652732e, type: 3}
+  type: 6
   itemName: Clean_Crystal
   description: 
   sellPrice: 0
   buyPrice: 0
+  healingPotential: 0
+  bulletPrefab: {fileID: 0}
+  bulletItem: {fileID: 0}
   damageValue: 0
   reloadSpeed: 0
-  bulletType: {fileID: 0}
   bulletStootDelay: 0
-  healingPotential: 0
+  magazineCapacity: 0
+  aimingTime: 0
+  weaponRange: 0

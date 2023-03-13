@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: knife_weapon
   m_EditorClassIdentifier: 
   prefabForInventory: {fileID: 2912398922761620072, guid: ee154cc83e6335a4593a45df0ca1469a, type: 3}
+  itemImage: {fileID: 21300000, guid: 25bd97cf707fc594cbf7700b09bb2eb5, type: 3}
   type: 3
   itemName: kitchen knife
   description: Ordinary kitchen knife, could be in anyone's house;
