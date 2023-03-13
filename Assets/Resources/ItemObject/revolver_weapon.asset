@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: revolver_weapon
   m_EditorClassIdentifier: 
   prefabForInventory: {fileID: 2912398922761620072, guid: 21822f24cede6dd41b3af5eb19ba8ed4, type: 3}
-  prefabForScene: {fileID: 613644869108775753, guid: 2a59b1a6c0f21f74e8630029a65d9f19, type: 3}
   type: 2
   ID: 1
   itemName: Revolver
   description: 
   sellPrice: 25
   buyPrice: 500
-  damageValue: 15
-  reloadSpeed: 10
-  bulletType: {fileID: 19026177839507540, guid: b7ae10a17e67dc74eade85509a3d702f, type: 3}
-  bulletStootDelay: 2
   healingPotential: 0
+  bulletPrefab: {fileID: 19026177839507540, guid: b7ae10a17e67dc74eade85509a3d702f, type: 3}
+  bulletItem: {fileID: 11400000, guid: 64aac8dec7e4e204d9fe8c19c1ccb877, type: 2}
+  damageValue: 35
+  reloadSpeed: 5
+  bulletStootDelay: 1
+  magazineCapacity: 6
+  aimingTime: 3
+  weaponRange: 350

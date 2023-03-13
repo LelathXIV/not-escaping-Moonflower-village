@@ -18,6 +18,10 @@ TagManager:
   - backpack
   - actionTrigger
   - canvas
+  - journal
+  - projectile
+  - meleeWeaponSlot
+  - miniGame
   layers:
   - Default
   - TransparentFX
@@ -25,8 +29,8 @@ TagManager:
   - 
   - Water
   - UI
-  - collectable
-  - 
+  - zoomCamera
+  - projectiles
   - 
   - 
   - 

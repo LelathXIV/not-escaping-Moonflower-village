@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     [Inject] private IGamePauseService gamePause;
     private Animator playerAnimator;
     public Camera activeCamera;
+    public PlayerShootingSystem playerShootingSystem;
+    public BattleMode battleMode;
 
     private Vector3 right;
     private Vector3 forward;
@@ -28,6 +30,8 @@ public class PlayerController : MonoBehaviour
 
         //finding active camera
         activeCamera = (Camera)FindObjectOfType(typeof(Camera));
+        playerShootingSystem = GetComponent<PlayerShootingSystem>();
+        battleMode = GetComponent<BattleMode>();
     }
 
     void Update()
@@ -65,12 +69,17 @@ public class PlayerController : MonoBehaviour
             if (move != Vector3.zero)
             {
                 //walking happens here!!
+                playerShootingSystem.StopAiming();
                 gameObject.transform.forward = move;
                 Walk();
             }
             else if(move == Vector3.zero)
             {
                 Idle();
+                if (battleMode.isInBattle == true)
+                {
+                    battleMode.LookAtTargetEnemy();
+                }
             }
 
             controller.Move(move * Time.deltaTime * playerSpeed);

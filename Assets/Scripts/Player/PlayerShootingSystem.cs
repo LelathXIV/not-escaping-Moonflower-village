@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using UnityEngine.UI;
 
 public class PlayerShootingSystem : MonoBehaviour
 {
     [Inject] IPlayerWeapon playerWeapon;
-    public bool weaponIsEquiped;
     public float damageValue;
-    IEnumerator reload;
-
+    public float aimingTimer;
+    public GameObject aimingUI;
+    public GameObject aimingLine;
     //wep info will be sent here
 
     private void Awake()
@@ -25,51 +26,39 @@ public class PlayerShootingSystem : MonoBehaviour
         RaycastHit hit;
 
         if (playerWeapon.isReloading)
-            return;
-
-        if (weaponIsEquiped == true)
+           return;
+        //add aiming
+        if (playerWeapon.weaponIsEquiped == true)
         {
-            if (Physics.Raycast(ray, out hit, 100))
+            if (Physics.Raycast(ray, out hit, playerWeapon.weaponRange))
             {
-                if (hit.transform.gameObject.tag == "enemy" && playerWeapon.isReloading != true && playerWeapon.isDelaying != true)
+                if (hit.transform.gameObject.tag == "enemy"  && playerWeapon.isReloading != true 
+                     && playerWeapon.magazineCapacity > 0)
                 {
-                    playerWeapon.Fire();
+                    aimingUI.SetActive(true);
+                    aimingTimer += Time.deltaTime;
+                    aimingLine.GetComponent<Image>().fillAmount = aimingTimer / playerWeapon.aimingTime;
+                    if (aimingTimer >= playerWeapon.aimingTime)
+                    {
+                        playerWeapon.Fire();
+                        aimingTimer = 0;
+                        //reloading settings
+                        playerWeapon.bulletsInMagazine -= 1;
 
-                    playerWeapon.isDelaying = true;
-
-                    print(playerWeapon.isDelaying);
-                    StartCoroutine(ShootDelay());
+                        if (playerWeapon.bulletsInMagazine <= 0)
+                        {
+                            playerWeapon.Reloading();
+                        }
+                    }
                 }
+              
             }
         }
     }
-
-    public void GetWeapon(ItemObject item)
+    public void StopAiming()
     {
-        weaponIsEquiped = true;
-        playerWeapon.bulletPrefab = item.bulletType;
-        playerWeapon.damageValue = item.damageValue;
-        damageValue = playerWeapon.damageValue;
-        playerWeapon.bulletShotDelay = item.bulletStootDelay;
-        playerWeapon.reload = item.reloadSpeed;
-        //добавить замену картинки в слоте оружия
+        aimingTimer = 0;
+        aimingUI.SetActive(false);
+        aimingLine.GetComponent<Image>().fillAmount = 0;
     }
-
-    IEnumerator ShootDelay()
-    {
-        yield return new WaitForSeconds(playerWeapon.bulletShotDelay);
-        playerWeapon.isDelaying = false;
-        print(playerWeapon.isDelaying);
-    }
-
-    //reload ammo
-    //IEnumerator Reload()
-    //{
-    //
-    //    yield return new WaitForSeconds(playerWeapon.reload);
-    //
-    //    playerWeapon.isReloading = false;
-    //    Debug.Log(playerWeapon.isReloading);
-    //
-    //}
 }

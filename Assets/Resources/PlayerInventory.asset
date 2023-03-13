@@ -14,6 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Container:
   - item: {fileID: 11400000, guid: 964533541e08ffd4c979a522cdaadd3c, type: 2}
-    amount: 255
-  - item: {fileID: 11400000, guid: e40a9e9567225454bbec25f39159df7c, type: 2}
     amount: 1

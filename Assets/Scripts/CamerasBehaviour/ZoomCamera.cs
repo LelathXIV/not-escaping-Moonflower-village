@@ -12,7 +12,7 @@ public class ZoomCamera : MonoBehaviour
 
             RaycastHit hit;
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, 100, 1 << LayerMask.NameToLayer("collectable"))) //everything collectable - to collectable layer
+            if (Physics.Raycast(ray, out hit, 100, 1 << LayerMask.NameToLayer("zoomCamera"))) //everything collectable - to collectable layer
             {
                 if (hit.transform)
                 {
@@ -28,14 +28,11 @@ public class ZoomCamera : MonoBehaviour
         {
             case ("collectable"):
                 Debug.Log(hit.transform.tag);
-                hit.transform.gameObject.GetComponent<ItemActionTest>().AddToInventory();
-                break;
-            case ("actionTrigger"):
-                Debug.Log(hit);
-                hit.transform.gameObject.GetComponent<QuestColliders>().targetObject.GetComponent<Animator>().SetBool("onClick", true);
-           //     anim.SetBool("isPlaying", true); //use target animation
-           //  UI.gameObject.SetActive(false); //shut down ui while animation - not sure of not annoing for player
+                hit.transform.gameObject.GetComponent<Items_InWorld>().AddToInventory(); 
+                hit.transform.gameObject.GetComponent<ItemsInWorldLoader>().ObjectIsTaken();
+
                 break;
         }
     }
 }
+
