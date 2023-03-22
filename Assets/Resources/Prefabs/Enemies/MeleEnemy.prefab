@@ -174,7 +174,7 @@ MonoBehaviour:
   timerOfSight: 15
   followingPlayerIfOutOfSight: 15
   viewFieldDistance: 500
-  attackRange: 10
+  attackRange: 2
   attacDamageValue: 25
   attacDelay: 2
   attacAnimationTime: 2

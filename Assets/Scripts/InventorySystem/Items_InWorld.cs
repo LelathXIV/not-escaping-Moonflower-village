@@ -26,6 +26,7 @@ public class Items_InWorld : MonoBehaviour
         
         var landedImg = Instantiate(pickedItemPanel, pickedItemsImages);
         landedImg.transform.Find("image").GetComponent<Image>().sprite = item.itemImage;
+
         if(amount > 1)
         { landedImg.transform.Find("amount").GetComponent<TextMeshProUGUI>().text = amount.ToString(); }
 

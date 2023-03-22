@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Zenject;
+using Zenject.SpaceFighter;
+using System.Collections.Generic;
 
 public class InventoryItemAction : MonoBehaviour
 {
@@ -13,7 +15,6 @@ public class InventoryItemAction : MonoBehaviour
     private string itemStatsText;
     private Transform useObjectButton;
     private string contextButtontext;
-    private Camera currentlyActiveCamera;
 
     private void Awake()
     {
@@ -21,7 +22,7 @@ public class InventoryItemAction : MonoBehaviour
         btn.onClick.AddListener(ActionOnClick);
         darkeningPanel = Resources.Load("Prefabs/PanelsPrefabs/DarkeningPanel") as GameObject;
         itemDescriptionPrefab = Resources.Load("Prefabs/PanelsPrefabs/ObjectContextPanel") as GameObject;
-        currentlyActiveCamera = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().activeCamera;
+        //currentlyActiveCamera = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().activeCamera;
     }
 
     public void Start()
@@ -77,6 +78,9 @@ public class InventoryItemAction : MonoBehaviour
                 GameObject.FindGameObjectWithTag("meleeWeaponSlot").GetComponent<MeleeWeaponSlot>().AssignWeapon(item);
                 Destroy(useObjectButton.gameObject.transform.parent.transform.parent.gameObject);
                 break;
+            case ItemType.questObject:
+                useObjectButton.gameObject.SetActive(false);
+                break;
         }
         useObjectButton.gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
     }
@@ -109,8 +113,6 @@ public class InventoryItemAction : MonoBehaviour
                 //description
                 break;
             case ItemType.questObject:
-                itemStatsText = ("Opens ancient chests"
-                                 ).ToString();
                 contextButtontext = "Use";
                 break;
             case ItemType.document:

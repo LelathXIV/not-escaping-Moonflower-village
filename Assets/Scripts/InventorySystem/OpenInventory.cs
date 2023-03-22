@@ -6,7 +6,6 @@ using Zenject;
 public class OpenInventory : MonoBehaviour
 {
     public GameObject inventory;
-    public GameObject invVisualsHolder;
     [Inject] IGamePauseService gamePause;
     public void OpenInventoryButton()
     {

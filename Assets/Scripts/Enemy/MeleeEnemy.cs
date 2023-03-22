@@ -30,8 +30,10 @@ public class MeleeEnemy : Enemy
             }
             if(imFighting)
             {
-                float distance = Vector3.Distance(this.transform.position, playerGameobject.transform.position);
                 agent.SetDestination(playerGameobject.transform.position);
+
+                float distance = Vector3.Distance(this.transform.position, playerGameobject.transform.position);
+
                 if (distance <= attackRange)
                     StartCoroutine(attac());
             }

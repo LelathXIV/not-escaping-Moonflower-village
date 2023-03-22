@@ -45,7 +45,6 @@ public class Enemy : MonoBehaviour
     {
         RaycastHit hit;
         Vector3 directionOfPlayer = playerGameobject.transform.position - transform.position;
-
         if (Physics.Raycast(transform.position, directionOfPlayer, out hit, viewFieldDistance))
         {
             if (hit.transform.tag == "Player")

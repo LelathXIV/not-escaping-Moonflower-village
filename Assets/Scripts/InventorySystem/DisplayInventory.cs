@@ -53,7 +53,7 @@ public class DisplayInventory : MonoBehaviour
                 obj.GetComponentInChildren<TextMeshProUGUI>().text = inventory.Container[i].amount.ToString("n0");
                 itemsDisplayed.Add(inventory.Container[i], obj);
                 obj.gameObject.name = inventory.Container[i].item.prefabForInventory.name;
-            }          
+            }
         }
 
         foreach (Transform child in transform)
@@ -71,17 +71,5 @@ public class DisplayInventory : MonoBehaviour
                 Destroy(child.gameObject);
             }
         }
-
-
-      //foreach (Transform child in transform)
-      //{
-      //    for (int i = 0; i < inventory.Container.Count; i++)
-      //    {
-      //        if (child.name == inventory.Container[i].item.prefabForInventory.name)
-      //        { return; }
-      //        else 
-      //            Destroy(child.gameObject);
-      //    }
-      //}
     }
 }

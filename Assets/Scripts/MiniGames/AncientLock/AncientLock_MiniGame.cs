@@ -47,7 +47,7 @@ public class AncientLock_MiniGame : MonoBehaviour
                         indicator.GetComponent<MeshRenderer>().material.color = Color.black;
                     }
                     mgStarted = true;
-                    keyObject.SetActive(true);
+                    GetComponent<Animator>().SetTrigger("Active");
                 }
             }
                 
@@ -58,9 +58,8 @@ public class AncientLock_MiniGame : MonoBehaviour
                     reward.SetActive(true);
                 }
                 chestTop.SetActive(false);
-            }//load finished state on chest
+            }//load finished state of chest
         }
-
         startRotation = lockObject.transform.localRotation;
     }
 
@@ -74,7 +73,6 @@ public class AncientLock_MiniGame : MonoBehaviour
             {
                 if (hit.transform == turnRight.transform) //если попал по правой кнопке или попал по правой кнопке - делаем механику
                 {
-                   
                     isRotatingRight = true;
                 }
                 if (hit.transform == turnLeft.transform) //если попал по левой кнопке или попал по правой кнопке - делаем механику
@@ -179,6 +177,8 @@ public class AncientLock_MiniGame : MonoBehaviour
 
     public void StartMG()
     {
+        print("starting MG");
+
         foreach (GameObject indicator in progressIndicators)
         {
             indicator.GetComponent<MeshRenderer>().material.color = Color.black;
@@ -190,12 +190,23 @@ public class AncientLock_MiniGame : MonoBehaviour
 
     void SaveMG()
     {
-        var thisMGSaveData = new AncientChestMGsSaveData();
-        thisMGSaveData.chestCoordinates = transform.position;
-        thisMGSaveData.MGstarted = mgStarted;
-        thisMGSaveData.MGfinished = mgFinished;
-        SaveGameManager.CurrentSaveData._ancientChestMGsSaveDatas.Add(thisMGSaveData);
-        SaveGameManager.SaveGame();
+        var saveExists = false;
+        for (int i = 0; i < SaveGameManager.CurrentSaveData._ancientChestMGsSaveDatas.Count; i++)
+        {
+            if (SaveGameManager.CurrentSaveData._ancientChestMGsSaveDatas[i].chestCoordinates == transform.position)
+            {
+                saveExists = true;
+            }
+        }
+        if(!saveExists)
+        {
+            var thisMGSaveData = new AncientChestMGsSaveData();
+            thisMGSaveData.chestCoordinates = transform.position;
+            thisMGSaveData.MGstarted = mgStarted;
+            thisMGSaveData.MGfinished = mgFinished;
+            SaveGameManager.CurrentSaveData._ancientChestMGsSaveDatas.Add(thisMGSaveData);
+            SaveGameManager.SaveGame();
+        }
     }
 }
 

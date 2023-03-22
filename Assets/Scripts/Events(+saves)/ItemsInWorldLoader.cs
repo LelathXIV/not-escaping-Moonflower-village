@@ -18,6 +18,8 @@ public class ItemsInWorldLoader : MonoBehaviour
 
     public void ObjectIsTaken()
     {
+       // SaveGameManager.CurrentSaveData._listObWorldObjects.Clear();
+
         var thisItem = new ObjectsInWorldSaveData();
         thisItem.isTaken = true;
         thisItem.name = this.gameObject.name;

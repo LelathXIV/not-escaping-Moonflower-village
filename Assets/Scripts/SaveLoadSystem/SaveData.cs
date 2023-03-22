@@ -33,5 +33,15 @@ public class SaveData
 
     //dialogue triggers
     public List<DialogueTriggersSaveData> _dialogueTriggersSaveData = new List<DialogueTriggersSaveData>();
+
+    //list of objects that was already opened
+    public List<OpenableObjects> _openableObjects = new List<OpenableObjects>();
+
+    //list of quest objects in world
+    public List<QuestObjectsSaveData> _questObjectsSaveData = new List<QuestObjectsSaveData>();
+
+    //list on contextActionColliders
+
+    public List<ContextQuestColliderSaveData> _contextQuestColliders = new List<ContextQuestColliderSaveData>();
 }
 

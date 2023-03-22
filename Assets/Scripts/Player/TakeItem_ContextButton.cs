@@ -37,7 +37,6 @@ public class TakeItem_ContextButton : MonoBehaviour
         foreach(GameObject item in itemsToCollect)
         {
             item.GetComponent<Items_InWorld>().AddToInventory();
-            item.GetComponent<ItemsInWorldLoader>().ObjectIsTaken(); //will replace with generator later
         }
         itemsToCollect.Clear();
         ContextImag_TakeItem.gameObject.SetActive(false);
