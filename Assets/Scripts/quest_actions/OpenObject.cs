@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class OpenObject : MonoBehaviour
 {
+
+    //objects for one-click action
+
     Animator animator;
     public List<GameObject> rewards;
     
@@ -29,28 +33,35 @@ public class OpenObject : MonoBehaviour
     }
 
     public void ShowRewards()
-    {
-        foreach(GameObject item in rewards)
+    {               
+        for (int i = 0; i < rewards.Count; i++)
         {
-            try
+            if (rewards[i] == null)
             {
-                item.gameObject.SetActive(true);
-                //gives non criticall error on load if obj is already taken
+                rewards.Remove(rewards[i]);
             }
-            catch
-            {
-                Destroy(this);
-            }
+            else rewards[i].SetActive(true);
         }
     }
 
     void SaveObjectData()
     {
-        var SavedObject = new OpenableObjects();
-        SavedObject.activated = true;
-        SavedObject.objectPosition = transform.position;
-        SaveGameManager.CurrentSaveData._openableObjects.Add(SavedObject);
-        SaveGameManager.SaveGame();
+        var saveExists = false;
+        for (int i = 0; i < SaveGameManager.CurrentSaveData._openableObjects.Count; i++)
+        {
+            if (SaveGameManager.CurrentSaveData._openableObjects[i].objectPosition == transform.position)
+            {
+                saveExists = true;
+            }
+        }
+        if (!saveExists)
+        {
+            var SavedObject = new OpenableObjects();
+            SavedObject.activated = true;
+            SavedObject.objectPosition = transform.position;
+            SaveGameManager.CurrentSaveData._openableObjects.Add(SavedObject);
+            SaveGameManager.SaveGame();
+        }
     }
 }
 

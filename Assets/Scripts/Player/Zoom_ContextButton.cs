@@ -8,7 +8,6 @@ public class Zoom_ContextButton : MonoBehaviour
     private Button btn;
     [SerializeField] GameObject contextActionButton;
     public Transform ContextImag_zoomIn;
-
     public GameObject zoomCamera;
     public GameObject zoomUI;
     private GameObject screenJoyStick;
@@ -17,7 +16,6 @@ public class Zoom_ContextButton : MonoBehaviour
     public InventoryObject playerInventory;
     public GameObject playerBody;
     public bool isInZoom;
-
 
     private void Awake()
     {

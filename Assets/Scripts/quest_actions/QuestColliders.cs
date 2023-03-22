@@ -21,6 +21,7 @@ public class QuestColliders : MonoBehaviour
         {
             if (SaveGameManager.CurrentSaveData._questCollidersSaveDatas[i].position == this.transform.position &&
                 SaveGameManager.CurrentSaveData._questCollidersSaveDatas[i].expectedItemUsed == true)
+                RunAnimation();
                 Destroy(this.gameObject); //for chests check if MG is finished;
         }
         player = GameObject.FindGameObjectWithTag("Player");

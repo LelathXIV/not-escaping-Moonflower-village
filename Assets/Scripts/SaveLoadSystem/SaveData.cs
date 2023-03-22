@@ -37,9 +37,6 @@ public class SaveData
     //list of objects that was already opened
     public List<OpenableObjects> _openableObjects = new List<OpenableObjects>();
 
-    //list of quest objects in world
-    public List<QuestObjectsSaveData> _questObjectsSaveData = new List<QuestObjectsSaveData>();
-
     //list on contextActionColliders
 
     public List<ContextQuestColliderSaveData> _contextQuestColliders = new List<ContextQuestColliderSaveData>();

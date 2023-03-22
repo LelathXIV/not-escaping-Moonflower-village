@@ -8,22 +8,13 @@ public class OpenDoor : MonoBehaviour
     public List<GameObject> listOfTriggers;
     public GameObject theDoorObject;
     public GameObject player;
-    public GameObject zoomCollider;
     void Start()
     {
         animator = gameObject.GetComponent<Animator>();
-
-        for (int i = 0; i < SaveGameManager.CurrentSaveData._openableObjects.Count; i++)
-        {
-            if (SaveGameManager.CurrentSaveData._openableObjects[i].objectPosition == transform.position &&
-                SaveGameManager.CurrentSaveData._openableObjects[i].activated == true)
-            {
-                animator.SetTrigger("Active");
-            }
-        }
         player = GameObject.FindGameObjectWithTag("Player");
     }
-
+    //checks how many action colliders(keyholes) still exists
+    //if 0 - mtzns lock is opened
     private void Update()
     {
         for (int i = 0; i < listOfTriggers.Count; i++)
@@ -42,28 +33,16 @@ public class OpenDoor : MonoBehaviour
     public void RunAnimation()
     {
         animator.SetTrigger("Active");
-        SaveObjectData();
     }
 
     //to prevent door moving over player object
     public void MeshOn()
     {
         theDoorObject.GetComponent<MeshCollider>().enabled = true;
-        player.GetComponent<Zoom_ContextButton>().CloseZoom();
-        zoomCollider.gameObject.SetActive(false);
     }
 
     public void MeshOff()
     {
         theDoorObject.GetComponent<MeshCollider>().enabled = false;
-    }
-
-    void SaveObjectData()
-    {
-        var SavedObject = new OpenableObjects();
-        SavedObject.activated = true;
-        SavedObject.objectPosition = transform.position;
-        SaveGameManager.CurrentSaveData._openableObjects.Add(SavedObject);
-        SaveGameManager.SaveGame();
     }
 }

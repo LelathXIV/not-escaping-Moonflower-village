@@ -10,6 +10,25 @@ public class TakeItem_ContextButton : MonoBehaviour
     public int amount;
     public List<GameObject> itemsToCollect;
 
+    void Start()
+    {
+        StartCoroutine(LateStart(1f));
+    }
+
+    IEnumerator LateStart(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        //Your Function You Want to Call
+        for (int i = 0; i < itemsToCollect.Count; i++)
+        {
+            if (itemsToCollect[i] == null)
+            {
+                itemsToCollect.Remove(itemsToCollect[i]);
+            }
+        }
+        ContextImag_TakeItem.gameObject.SetActive(false);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "collectable")
@@ -25,7 +44,6 @@ public class TakeItem_ContextButton : MonoBehaviour
         if (other.tag == "collectable") //change action icon and actions here
         {
             itemsToCollect.Remove(other.gameObject);
-
             ContextImag_TakeItem.gameObject.SetActive(false);
         }
     }
