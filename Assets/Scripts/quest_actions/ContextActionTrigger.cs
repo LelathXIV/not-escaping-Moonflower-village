@@ -19,6 +19,12 @@ public class ContextActionTrigger : MonoBehaviour
         }
     }
 
+    public void RunAction()
+    {
+        targetObject.GetComponent<Animator>().SetTrigger("Active");
+        SaveQuestColliderData();
+        Destroy(this.gameObject);
+    }
     public void SaveQuestColliderData()
     {
         var QuestCollidersSaveData = new ContextQuestColliderSaveData();

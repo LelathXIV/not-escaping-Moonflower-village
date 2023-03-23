@@ -1,16 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class OpenObject : MonoBehaviour
 {
-
-    //objects for one-click action
-
     Animator animator;
+    //objects for one-click action
     public List<GameObject> rewards;
-    
+
     void Start()
     {
         animator = gameObject.GetComponent<Animator>();

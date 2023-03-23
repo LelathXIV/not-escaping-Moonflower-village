@@ -1,10 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
-using UnityEngine.UI;
-using Zenject.SpaceFighter;
+
 
 public class QuestColliders : MonoBehaviour
 {
@@ -17,14 +13,13 @@ public class QuestColliders : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         for (int i = 0; i < SaveGameManager.CurrentSaveData._questCollidersSaveDatas.Count; i++)
         {
             if (SaveGameManager.CurrentSaveData._questCollidersSaveDatas[i].position == this.transform.position &&
                 SaveGameManager.CurrentSaveData._questCollidersSaveDatas[i].expectedItemUsed == true)
                 RunAnimation();
-                Destroy(this.gameObject); //for chests check if MG is finished;
         }
-        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public void CheckIfItemIsInInventory()
@@ -43,8 +38,8 @@ public class QuestColliders : MonoBehaviour
 
     public void RunAnimation()
     {
-        print("starting animation");
         targetObject.GetComponent<Animator>().SetTrigger("Active");
+        Destroy(this.gameObject); //for check if MG is finished;
     }
 
     public void KeyItemUsed()

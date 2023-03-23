@@ -7,6 +7,7 @@ public class OpenDoor : MonoBehaviour
     Animator animator;
     public List<GameObject> listOfTriggers;
     public GameObject theDoorObject;
+    public GameObject zoomCollider;
     public GameObject player;
     void Start()
     {
@@ -32,6 +33,7 @@ public class OpenDoor : MonoBehaviour
 
     public void RunAnimation()
     {
+        zoomCollider.SetActive(false);
         animator.SetTrigger("Active");
     }
 

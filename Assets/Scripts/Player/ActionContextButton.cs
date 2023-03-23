@@ -4,8 +4,8 @@ using UnityEngine.UI;
 public class ActionContextButton : MonoBehaviour
 {
     public GameObject contextActionImage;
-    public GameObject targetObject;
     public Button btn;
+    GameObject actionCollider;
 
     private void Start()
     {
@@ -17,8 +17,7 @@ public class ActionContextButton : MonoBehaviour
         if (other.tag == "contextAction")
         {
             contextActionImage.gameObject.SetActive(true);
-            targetObject = other.transform.GetComponent<ContextActionTrigger>().targetObject;
-            other.transform.GetComponent<ContextActionTrigger>().SaveQuestColliderData();
+            actionCollider = other.gameObject;
             btn.onClick.AddListener(Action);
         }
     }
@@ -34,6 +33,8 @@ public class ActionContextButton : MonoBehaviour
 
     void Action()
     {
-        targetObject.GetComponent<Animator>().SetTrigger("Active");
+        actionCollider.GetComponent<ContextActionTrigger>().RunAction();
+        contextActionImage.gameObject.SetActive(false);
+        btn.onClick.RemoveAllListeners();
     }
 }

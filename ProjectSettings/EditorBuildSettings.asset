@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/RealWorldScene.unity
+    guid: 586ff5e8b1c44774381c395af1866bd0
   m_configObjects: {}
