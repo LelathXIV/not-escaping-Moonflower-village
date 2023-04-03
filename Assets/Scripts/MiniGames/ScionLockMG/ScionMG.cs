@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using UnityEngine;
 
 public class ScionMG : MonoBehaviour
@@ -14,22 +13,29 @@ public class ScionMG : MonoBehaviour
     public float pipeRotation_Outer;
 
     public List<GameObject> spheres;
-    public List<GameObject> megaSphere;
     public List<bool> isLit;
-    public List<bool> MegaSpheresLit;
 
     public Camera thisZoomCamera;
     public Material litMaterial;
     public Material darkMaterial;
 
-    //if megasphere is not lit, on move it shuts down sphere that is closest to it
-    // bool - wasLit, if not - shut down one
-    //limit steps - as lose conditions?
     private void Awake()
     {
         pipeRotation_Center = UnityEditor.TransformUtils.GetInspectorRotation(pipe_Center.transform).y;
         pipeRotation_Middle = UnityEditor.TransformUtils.GetInspectorRotation(pipe_Middle.transform).y;
         pipeRotation_Outer = UnityEditor.TransformUtils.GetInspectorRotation(pipe_Outer.transform).y;
+    }
+
+    private void Start()
+    {
+        for (int x = 0; x < isLit.Count; x++)
+        {
+            if (isLit[x])
+            {
+                spheres[x].GetComponent<MeshRenderer>().material = litMaterial;
+                spheres[x].GetComponent<SphereLitting>().isLit = true;
+            }
+        }
     }
 
     private void Update()
@@ -42,7 +48,7 @@ public class ScionMG : MonoBehaviour
             {
                 if (hit.transform == pipe_Center) 
                 {
-                    RotateDial_Center(); //quaternion is always new vector3
+                    RotateDial_Center(); //quaternion is always new vector3 - !!!!!!!
                 }
                 if (hit.transform == pipe_Middle) 
                 {
@@ -85,7 +91,6 @@ public class ScionMG : MonoBehaviour
             pipeRotation_Outer = 0;
         }
     }
-
     public void CheckNearSpheres()
     {
         var checkList = new List<bool>();
@@ -94,36 +99,16 @@ public class ScionMG : MonoBehaviour
             if (isLit[i] == true)
                 checkList.Add(isLit[i]);
         }
+        if(checkList.Count == 0)
+        {
+            print("lost");
+            //resetMG
+        }
         if (checkList.Count == isLit.Count)
         { 
-            StartCoroutine(GameWon());
+          //  StartCoroutine(GameWon());
             print("YOU WON!");
+            //runANimation
         }
-    }
-
-    IEnumerator GameWon()
-    {
-        print("you need to add MegaSpheres into win conditions");
-        float timer = 0;
-        while(timer < 10)
-        {
-            timer += Time.deltaTime;
-            foreach(GameObject sphere in spheres)
-            {
-                sphere.transform.position = new Vector3(
-                    Mathf.Lerp(sphere.transform.position.x, 0, 10),
-                    Mathf.Lerp(sphere.transform.position.y, 0, 10),
-                    Mathf.Lerp(sphere.transform.position.z, 0, 10));
-            }
-            foreach (GameObject sphere in megaSphere)
-            {
-                sphere.transform.position = new Vector3(
-                    Mathf.Lerp(sphere.transform.position.x, 0, 10),
-                    Mathf.Lerp(sphere.transform.position.y, 0, 10),
-                    Mathf.Lerp(sphere.transform.position.z, 0, 10));
-            }
-            break;
-        }
-        yield return null;
     }
 }
