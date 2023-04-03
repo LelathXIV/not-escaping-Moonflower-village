@@ -55,8 +55,8 @@ public class MeleeEnemy : Enemy
                 float distanceNew = Vector3.Distance(this.transform.position, playerGameobject.transform.position);
                 if (distanceNew <= attackRange)
                 {
-                    playerGameobject.GetComponent<PlayerHealth>().playerCurrentHealth -= attacDamageValue;
-                    print(playerGameobject.GetComponent<PlayerHealth>().playerCurrentHealth);
+                    playerGameobject.GetComponent<PlayerStats>().playerCurrentHealth -= attacDamageValue;
+                    print(playerGameobject.GetComponent<PlayerStats>().playerCurrentHealth);
                 }
                 agent.isStopped = false;
                 GetComponent<MeshRenderer>().material.color = originalColor;

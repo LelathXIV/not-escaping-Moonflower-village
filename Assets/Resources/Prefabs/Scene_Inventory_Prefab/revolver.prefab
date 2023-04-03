@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8216522580409599912}
   - component: {fileID: -282182949713715121}
   - component: {fileID: 8285907789216944067}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: revolver
   m_TagString: collectable
   m_Icon: {fileID: 0}
@@ -31,6 +31,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4543110227384836191}
   m_Father: {fileID: 0}
@@ -55,6 +56,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -181,6 +183,10 @@ PrefabInstance:
     - target: {fileID: 7882525785279539604, guid: 6f168fc4a0d20ed429d19e173747a691, type: 3}
       propertyPath: m_Name
       value: Particle System
+      objectReference: {fileID: 0}
+    - target: {fileID: 7882525785279539604, guid: 6f168fc4a0d20ed429d19e173747a691, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f168fc4a0d20ed429d19e173747a691, type: 3}

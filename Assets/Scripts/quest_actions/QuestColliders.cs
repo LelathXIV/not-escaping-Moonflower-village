@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,10 +11,15 @@ public class QuestColliders : MonoBehaviour
     public ScriptableObject expectedItem; //key item to start action
     public bool expectedItemUsed; //is this action already finished
     public List<string> hints; //on click texts
+    public Animator anim;
+    public AnimationClip animationClip;
+    public GameObject zoomUI;
+    float timeBeforeSuicide;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        anim = targetObject.GetComponent<Animator>();
         for (int i = 0; i < SaveGameManager.CurrentSaveData._questCollidersSaveDatas.Count; i++)
         {
             if (SaveGameManager.CurrentSaveData._questCollidersSaveDatas[i].position == this.transform.position &&
@@ -24,29 +30,41 @@ public class QuestColliders : MonoBehaviour
 
     public void CheckIfItemIsInInventory()
     {
-        for (int i = 0; i < inventory.Container.Count; i++)
+        if(expectedItem != null)
         {
-            if (inventory.Container[i].item == expectedItem)
+            for (int i = 0; i < inventory.Container.Count; i++)
             {
-                inventory.RemoveItem(inventory.Container[i].item, 1);
-                player.GetComponent<PlayerSaveEvents>().SaveInventory();
-                RunAnimation();
-                KeyItemUsed();
+                if (inventory.Container[i].item == expectedItem)
+                {
+                    inventory.RemoveItem(inventory.Container[i].item, 1);
+                    player.GetComponent<PlayerSaveEvents>().SaveInventory();
+                    RunAnimation();
+                    KeyItemUsed();
+                }
             }
         }
+        //else - run hints method
     }
 
     public void RunAnimation()
     {
-        targetObject.GetComponent<Animator>().SetTrigger("Active");
-        Destroy(this.gameObject); //for check if MG is finished;
+        timeBeforeSuicide = animationClip.length;
+        anim.SetTrigger("Active");
+        zoomUI.SetActive(false);
+        StartCoroutine(Suicide());
+    }
+
+    IEnumerator Suicide()
+    {
+        yield return new WaitForSeconds(timeBeforeSuicide);
+        zoomUI.SetActive(true);
+        Destroy(this.gameObject);
     }
 
     public void KeyItemUsed()
     {
         expectedItemUsed = true;
         SaveQuestColliderData();
-        Destroy(transform.gameObject);
     }
 
     public void SaveQuestColliderData()

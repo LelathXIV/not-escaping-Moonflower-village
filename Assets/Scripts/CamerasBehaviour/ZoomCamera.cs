@@ -24,6 +24,7 @@ public class ZoomCamera : MonoBehaviour
                 if (hit.transform)
                 {
                     OnClickAction(hit);
+                    print (hit);
                 }
             }
         }

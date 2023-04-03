@@ -11,12 +11,15 @@ public class PlayerShootingSystem : MonoBehaviour
     public float aimingTimer;
     public GameObject aimingUI;
     public GameObject aimingLine;
+    public float aimingSpeedBoost;
+
     //wep info will be sent here
 
     private void Awake()
     {
         playerWeapon.bulletPrefab = Resources.Load("Prefabs/Revolver_Bullet_shoot") as GameObject;
         playerWeapon.bulletSpawn = transform.Find("BulletSpawn");
+        aimingSpeedBoost = GetComponent<PlayerStats>().aimingSpeedBoost;
     }
 
     private void Update()
@@ -32,26 +35,31 @@ public class PlayerShootingSystem : MonoBehaviour
         {
             if (Physics.Raycast(ray, out hit, playerWeapon.weaponRange))
             {
-                if (hit.transform.gameObject.tag == "enemy"  && playerWeapon.isReloading != true 
-                     && playerWeapon.magazineCapacity > 0)
+                if (hit.transform.gameObject.tag == "enemy")
                 {
-                    aimingUI.SetActive(true);
-                    aimingTimer += Time.deltaTime;
-                    aimingLine.GetComponent<Image>().fillAmount = aimingTimer / playerWeapon.aimingTime;
-                    if (aimingTimer >= playerWeapon.aimingTime)
-                    {
-                        playerWeapon.Fire();
-                        aimingTimer = 0;
-                        //reloading settings
-                        playerWeapon.bulletsInMagazine -= 1;
+                    var enemy = hit.transform.gameObject;
 
-                        if (playerWeapon.bulletsInMagazine <= 0)
+                    if (playerWeapon.isReloading != true &&
+                       enemy.GetComponent<Enemy>().isAlive && //does not see range enemy
+                       playerWeapon.magazineCapacity > 0)
+                    {
+                        aimingUI.SetActive(true);
+                        aimingTimer += Time.deltaTime;
+                        aimingLine.GetComponent<Image>().fillAmount = aimingTimer / playerWeapon.aimingTime;
+                        if (aimingTimer >= playerWeapon.aimingTime * aimingSpeedBoost)
                         {
-                            playerWeapon.Reloading();
+                            playerWeapon.Fire();
+                            aimingTimer = 0;
+                            //reloading settings
+                            playerWeapon.bulletsInMagazine -= 1;
+
+                            if (playerWeapon.bulletsInMagazine <= 0)
+                            {
+                                playerWeapon.Reloading();
+                            }
                         }
                     }
                 }
-              
             }
         }
     }

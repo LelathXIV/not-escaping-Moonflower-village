@@ -6,9 +6,9 @@ public class OpenDoor : MonoBehaviour
 {
     Animator animator;
     public List<GameObject> listOfTriggers;
-    public GameObject theDoorObject;
     public GameObject zoomCollider;
     public GameObject player;
+    public GameObject zoomUI;
     void Start()
     {
         animator = gameObject.GetComponent<Animator>();
@@ -33,18 +33,18 @@ public class OpenDoor : MonoBehaviour
 
     public void RunAnimation()
     {
-        zoomCollider.SetActive(false);
         animator.SetTrigger("Active");
+        zoomUI.SetActive(false);
     }
 
-    //to prevent door moving over player object
-    public void MeshOn()
+    public void TurnOfZoom()
     {
-        theDoorObject.GetComponent<MeshCollider>().enabled = true;
-    }
-
-    public void MeshOff()
-    {
-        theDoorObject.GetComponent<MeshCollider>().enabled = false;
+        var playerZoom = player.GetComponent<Zoom_ContextButton>();
+        if (playerZoom.isInZoom)
+        {
+            zoomCollider.GetComponent<Collider>().enabled = false;
+            playerZoom.CloseZoom();
+            playerZoom.ClearContextActionWindow();
+        }
     }
 }
