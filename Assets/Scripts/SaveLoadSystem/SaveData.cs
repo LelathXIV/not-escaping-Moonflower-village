@@ -28,8 +28,10 @@ public class SaveData
     public string _playerMeleeWepEquipped;
     public bool _meleWepIsEquiped;
 
-    //ancient chest MG data
+    //miniGames SaveData
     public List<AncientChestMGsSaveData> _ancientChestMGsSaveDatas = new List<AncientChestMGsSaveData>();
+    public List<ScionMGSaveData> _scionMgSaveData = new List<ScionMGSaveData>();
+    public List<PadlockMGSaveData> _padlockMGSaveData = new List<PadlockMGSaveData>();
 
     //dialogue triggers
     public List<DialogueTriggersSaveData> _dialogueTriggersSaveData = new List<DialogueTriggersSaveData>();

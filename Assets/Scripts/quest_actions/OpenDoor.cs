@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +8,8 @@ public class OpenDoor : MonoBehaviour
     public GameObject zoomCollider;
     public GameObject player;
     public GameObject zoomUI;
+    public bool isKeyDoor;
+
     void Start()
     {
         animator = gameObject.GetComponent<Animator>();
@@ -18,16 +19,19 @@ public class OpenDoor : MonoBehaviour
     //if 0 - mtzns lock is opened
     private void Update()
     {
-        for (int i = 0; i < listOfTriggers.Count; i++)
+        if(isKeyDoor)
         {
-            if(listOfTriggers[i] == null)
+            for (int i = 0; i < listOfTriggers.Count; i++)
             {
-                listOfTriggers.Remove(listOfTriggers[i]);
+                if (listOfTriggers[i] == null)
+                {
+                    listOfTriggers.Remove(listOfTriggers[i]);
+                }
             }
-        }
-        if(listOfTriggers.Count == 0)
-        {
-            RunAnimation();
+            if (listOfTriggers.Count == 0)
+            {
+                RunAnimation();
+            }
         }
     }
 
@@ -35,6 +39,7 @@ public class OpenDoor : MonoBehaviour
     {
         animator.SetTrigger("Active");
         zoomUI.SetActive(false);
+        zoomCollider.GetComponent<Collider>().enabled = false;
     }
 
     public void TurnOfZoom()
@@ -42,7 +47,6 @@ public class OpenDoor : MonoBehaviour
         var playerZoom = player.GetComponent<Zoom_ContextButton>();
         if (playerZoom.isInZoom)
         {
-            zoomCollider.GetComponent<Collider>().enabled = false;
             playerZoom.CloseZoom();
             playerZoom.ClearContextActionWindow();
         }
