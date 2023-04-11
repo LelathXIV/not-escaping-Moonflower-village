@@ -1,22 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
+
 
 public class ScionMG : MonoBehaviour
 {
     public Transform pipe_Center;
     public Transform pipe_Middle;
     public Transform pipe_Outer;
-
-    public float pipeRotation_Center;
-    public float pipeRotation_Middle;
-    public float pipeRotation_Outer;
-
-    public bool rotatingCenter;
-    public bool rotatingMiddle;
-    public bool rotatingOuter;
-    public float rotationTime;
 
     public List<GameObject> spheres;
     public List<bool> isLit;
@@ -32,11 +23,14 @@ public class ScionMG : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-        for (int i = 0; i < SaveGameManager.CurrentSaveData._scionMgSaveData.Count; i++)
+        var mgSaveData = SaveGameManager.CurrentSaveData._scionMgSaveData;
+        for (int i = 0; i < mgSaveData.Count; i++)
         {
-            if (SaveGameManager.CurrentSaveData._scionMgSaveData[i].isFinished == true)
+            print("looking for saves");
+            if (mgSaveData[i].position == transform.position && mgSaveData[i].isFinished == true)
             {
                 scionMGFinished = true;
+                print("scion MG finished");
             }
         }
         if(scionMGFinished)
@@ -59,7 +53,7 @@ public class ScionMG : MonoBehaviour
                     spheres[x].GetComponent<SphereLitting>().isLit = true;
                 }
             }
-            GetInspectorRotations();
+          //  GetInspectorRotations();
         }
     }
 
@@ -73,71 +67,31 @@ public class ScionMG : MonoBehaviour
                 Ray ray = thisZoomCamera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit, 100, 1 << LayerMask.NameToLayer("zoomCamera")))
                 {
-                    if (hit.transform == pipe_Center && !rotatingCenter)
+                    if(hit.transform.tag == "openable")
                     {
-                        rotatingCenter = true;
-                        StartCoroutine(RotateDial_Center()); //quaternion is always new vector3 - !!!!!!!
-                    }
-                    if (hit.transform == pipe_Middle && !rotatingMiddle)
-                    {
-                        rotatingMiddle = true;
-                        StartCoroutine(RotateDial_Middle());
-                    }
-                    if (hit.transform == pipe_Outer && !rotatingOuter)
-                    {
-                        rotatingOuter = true;
-                        StartCoroutine(RotateDial_Outer());
+                        StartCoroutine(RotateDial(hit));
+                        print(hit.transform.name);
                     }
                 }
             }
             CheckNearSpheres();
         }
     }
-    //rotating coroutines
-    IEnumerator RotateDial_Center()
-    {
-        var basicRotation = pipeRotation_Center;
-        while (rotatingCenter)
-        {
-            pipeRotation_Center += Time.deltaTime * rotationTime;
-            pipe_Center.transform.localRotation = Quaternion.AngleAxis(pipeRotation_Center, Vector3.up);
-            if (pipeRotation_Center >= basicRotation + 30)
-            {
-                rotatingCenter = false;
-            }
-            yield return null;
-        }
-    } 
 
-    IEnumerator RotateDial_Middle()
+    IEnumerator RotateDial(RaycastHit hit)
     {
-        var basicRotation = pipeRotation_Middle;
-        while (rotatingMiddle)
+        float t = 0;
+        while (t < 1 )
         {
-            pipeRotation_Middle += Time.deltaTime * rotationTime;
-            pipe_Middle.transform.localRotation = Quaternion.AngleAxis(pipeRotation_Middle, Vector3.up);
-            if (pipeRotation_Middle >= basicRotation + 30)
-            {
-                rotatingMiddle = false;
-            }
+            t += Time.deltaTime;
+
+            Vector3 direction = new Vector3(hit.transform.localRotation.eulerAngles.x, Mathf.Round(hit.transform.localRotation.eulerAngles.y + 30), hit.transform.localRotation.eulerAngles.z);
+            Quaternion targetRotation = Quaternion.Euler(direction);
+            hit.transform.localRotation = Quaternion.Lerp(hit.transform.localRotation, targetRotation, Time.deltaTime * 1);
             yield return null;
         }
     }
 
-    IEnumerator RotateDial_Outer()
-    {
-        var basicRotation = pipeRotation_Outer;
-        while (rotatingOuter)
-        {
-            pipeRotation_Outer += Time.deltaTime * rotationTime;
-            pipe_Outer.transform.localRotation = Quaternion.AngleAxis(pipeRotation_Outer, Vector3.up);
-            if (pipeRotation_Outer >= basicRotation + 30)
-            {
-                rotatingOuter = false;
-            }
-            yield return null;
-        }
-    }
     public void CheckNearSpheres()
     {
         var mgStatus = new List<bool>();
@@ -205,15 +159,8 @@ public class ScionMG : MonoBehaviour
         spheres[randomSphere].GetComponent<MeshRenderer>().material = litMaterial;
         isLit[randomSphere] = true;
         isReseting = false;
-        GetInspectorRotations();
     }
 
-    void GetInspectorRotations()
-    {
-        pipeRotation_Center = UnityEditor.TransformUtils.GetInspectorRotation(pipe_Center.transform).y;
-        pipeRotation_Middle = UnityEditor.TransformUtils.GetInspectorRotation(pipe_Middle.transform).y;
-        pipeRotation_Outer = UnityEditor.TransformUtils.GetInspectorRotation(pipe_Outer.transform).y;
-    }
 
     void SaveMGStatus()
     {

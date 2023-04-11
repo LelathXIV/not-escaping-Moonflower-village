@@ -34,7 +34,6 @@ public static class SaveGameManager
         {
             string json = File.ReadAllText(fullPath);
             tempData = JsonUtility.FromJson<SaveData>(json);
-            Debug.Log(json);
         }
         else
         {

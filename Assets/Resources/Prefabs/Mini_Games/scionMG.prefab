@@ -1671,7 +1671,7 @@ MonoBehaviour:
   spheresInLine: []
   _isLitBools: 
   litMaterial: {fileID: 2100000, guid: 1cc08a3f4c4ff4ebb980be82aa6556b9, type: 2}
-  darkMaterial: {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  darkMaterial: {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
 --- !u!1 &4016808384292425146
 GameObject:
   m_ObjectHideFlags: 0
@@ -1733,7 +1733,7 @@ MonoBehaviour:
   spheresInLine: []
   _isLitBools: 
   litMaterial: {fileID: 2100000, guid: 1cc08a3f4c4ff4ebb980be82aa6556b9, type: 2}
-  darkMaterial: {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  darkMaterial: {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
 --- !u!1 &4016808384352042993
 GameObject:
   m_ObjectHideFlags: 0
@@ -3979,7 +3979,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  - {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6296,7 +6296,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  - {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8613,7 +8613,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  - {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12128,7 +12128,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  - {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14445,7 +14445,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  - {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14578,7 +14578,7 @@ MonoBehaviour:
   spheresInLine: []
   _isLitBools: 
   litMaterial: {fileID: 2100000, guid: 1cc08a3f4c4ff4ebb980be82aa6556b9, type: 2}
-  darkMaterial: {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  darkMaterial: {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
 --- !u!1 &4016808384685480701
 GameObject:
   m_ObjectHideFlags: 0
@@ -16859,7 +16859,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  - {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -18092,7 +18092,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4016808384760618003}
   - component: {fileID: 4016808384760618028}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: ZoomCollider
   m_TagString: zoomZone
   m_Icon: {fileID: 0}
@@ -18189,7 +18189,7 @@ MonoBehaviour:
   spheresInLine: []
   _isLitBools: 
   litMaterial: {fileID: 2100000, guid: 1cc08a3f4c4ff4ebb980be82aa6556b9, type: 2}
-  darkMaterial: {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  darkMaterial: {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
 --- !u!1 &4016808384847159495
 GameObject:
   m_ObjectHideFlags: 0
@@ -18251,7 +18251,7 @@ MonoBehaviour:
   spheresInLine: []
   _isLitBools: 
   litMaterial: {fileID: 2100000, guid: 1cc08a3f4c4ff4ebb980be82aa6556b9, type: 2}
-  darkMaterial: {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  darkMaterial: {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
 --- !u!1 &4016808384977191796
 GameObject:
   m_ObjectHideFlags: 0
@@ -19923,7 +19923,7 @@ MonoBehaviour:
   spheresInLine: []
   _isLitBools: 
   litMaterial: {fileID: 2100000, guid: 1cc08a3f4c4ff4ebb980be82aa6556b9, type: 2}
-  darkMaterial: {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  darkMaterial: {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
 --- !u!1 &4016808385077884535
 GameObject:
   m_ObjectHideFlags: 0
@@ -19985,7 +19985,7 @@ MonoBehaviour:
   spheresInLine: []
   _isLitBools: 
   litMaterial: {fileID: 2100000, guid: 1cc08a3f4c4ff4ebb980be82aa6556b9, type: 2}
-  darkMaterial: {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  darkMaterial: {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
 --- !u!1 &4016808385099304766
 GameObject:
   m_ObjectHideFlags: 0
@@ -20047,7 +20047,7 @@ MonoBehaviour:
   spheresInLine: []
   _isLitBools: 
   litMaterial: {fileID: 2100000, guid: 1cc08a3f4c4ff4ebb980be82aa6556b9, type: 2}
-  darkMaterial: {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  darkMaterial: {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
 --- !u!1 &4016808385190553223
 GameObject:
   m_ObjectHideFlags: 0
@@ -21719,7 +21719,7 @@ MonoBehaviour:
   spheresInLine: []
   _isLitBools: 
   litMaterial: {fileID: 2100000, guid: 1cc08a3f4c4ff4ebb980be82aa6556b9, type: 2}
-  darkMaterial: {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  darkMaterial: {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
 --- !u!1 &4016808385277988325
 GameObject:
   m_ObjectHideFlags: 0
@@ -23965,7 +23965,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  - {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24098,7 +24098,7 @@ MonoBehaviour:
   spheresInLine: []
   _isLitBools: 
   litMaterial: {fileID: 2100000, guid: 1cc08a3f4c4ff4ebb980be82aa6556b9, type: 2}
-  darkMaterial: {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  darkMaterial: {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
 --- !u!1 &4016808385414441754
 GameObject:
   m_ObjectHideFlags: 0
@@ -26344,7 +26344,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  - {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -26477,7 +26477,7 @@ MonoBehaviour:
   spheresInLine: []
   _isLitBools: 
   litMaterial: {fileID: 2100000, guid: 1cc08a3f4c4ff4ebb980be82aa6556b9, type: 2}
-  darkMaterial: {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  darkMaterial: {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
 --- !u!1 &4016808385471382158
 GameObject:
   m_ObjectHideFlags: 0
@@ -26523,9 +26523,9 @@ GameObject:
   - component: {fileID: 4016808385513861498}
   - component: {fileID: 4016808385513861493}
   - component: {fileID: 4016808385513861492}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Camera
-  m_TagString: zoomCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26677,7 +26677,7 @@ GameObject:
   - component: {fileID: 4016808385847113780}
   m_Layer: 0
   m_Name: scionMG
-  m_TagString: openable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26715,13 +26715,6 @@ MonoBehaviour:
   pipe_Center: {fileID: 4016808384102768822}
   pipe_Middle: {fileID: 4016808385190553216}
   pipe_Outer: {fileID: 4016808384977191797}
-  pipeRotation_Center: 0
-  pipeRotation_Middle: 0
-  pipeRotation_Outer: 0
-  rotatingCenter: 0
-  rotatingMiddle: 0
-  rotatingOuter: 0
-  rotationTime: 50
   spheres:
   - {fileID: 4016808386184829771}
   - {fileID: 4016808384463885500}
@@ -28432,7 +28425,7 @@ MonoBehaviour:
   spheresInLine: []
   _isLitBools: 
   litMaterial: {fileID: 2100000, guid: 1cc08a3f4c4ff4ebb980be82aa6556b9, type: 2}
-  darkMaterial: {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  darkMaterial: {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
 --- !u!1 &4016808386032038522
 GameObject:
   m_ObjectHideFlags: 0
@@ -30678,7 +30671,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  - {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -33028,7 +33021,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  - {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -35345,7 +35338,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  - {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -37662,7 +37655,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  - {fileID: 2100000, guid: c57dd522332a14159831e8eb2b8ecb36, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

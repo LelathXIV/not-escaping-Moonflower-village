@@ -116,6 +116,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 3.3333333
         value: {x: -16.954754, y: -9.05, z: -0.4469676}
+        inSlope: {x: 0, y: -1.8524275, z: 0}
+        outSlope: {x: 0, y: -1.8524275, z: 0}
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
+        time: 5.5666666
+        value: {x: -16.954754, y: -10.64, z: -0.4469676}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -895,6 +904,15 @@ AnimationClip:
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 5.5666666
+        value: -16.954754
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -926,6 +944,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 3.3333333
         value: -9.05
+        inSlope: -1.8524275
+        outSlope: -1.8524275
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 5.5666666
+        value: -10.64
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -962,6 +989,15 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3.3333333
+        value: -0.4469676
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 5.5666666
         value: -0.4469676
         inSlope: 0
         outSlope: 0
@@ -1401,7 +1437,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 5.6
-    functionName: TurnOfZoom
+    functionName: CheckZoomStatus
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

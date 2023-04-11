@@ -9,6 +9,11 @@ public class CameraFollowPlayer : MonoBehaviour
     [Range(0.01f, 1.0f)]
     public float smoothFactor = 0.5f;
 
+    private void Start()
+    {
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
     //makes awesome effect of switching camera, but after char goes out of cinemachine zone - camera smoothly follows player on respectable distance
     private void LateUpdate()
     {

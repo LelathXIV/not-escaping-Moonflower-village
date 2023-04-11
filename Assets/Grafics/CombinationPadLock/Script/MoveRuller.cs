@@ -25,6 +25,7 @@ public class MoveRuller : MonoBehaviour
         ruller2 = GameObject.Find("Ruller2");
         ruller3 = GameObject.Find("Ruller3");
         ruller4 = GameObject.Find("Ruller4");
+
         rotationsToNumber = new Dictionary<float, int>
         {
             { -144,0},
@@ -38,12 +39,13 @@ public class MoveRuller : MonoBehaviour
             { -72,8},
             { -108,9}
         };
+
         rulerToIntKeeper = new Dictionary<GameObject, int>
         {
-            { ruller1, rotationsToNumber[UnityEditor.TransformUtils.GetInspectorRotation(ruller1.transform).x] },
-            { ruller2, rotationsToNumber[UnityEditor.TransformUtils.GetInspectorRotation(ruller1.transform).x] },
-            { ruller3, rotationsToNumber[UnityEditor.TransformUtils.GetInspectorRotation(ruller1.transform).x] },
-            { ruller4, rotationsToNumber[UnityEditor.TransformUtils.GetInspectorRotation(ruller1.transform).x] }
+            { ruller1, rotationsToNumber[(ruller1.transform.localRotation.x)] },
+            { ruller2, rotationsToNumber[(ruller2.transform.localRotation.x)] },
+            { ruller3, rotationsToNumber[(ruller3.transform.localRotation.x)] },
+            { ruller4, rotationsToNumber[(ruller4.transform.localRotation.x)] }
         };
     }
 
@@ -72,33 +74,32 @@ public class MoveRuller : MonoBehaviour
                 }
             }
         }
-
-        void RotateRulers(GameObject ruler)
+        
+    }
+    void RotateRulers(GameObject ruler)
+    {
+        ruler.transform.Rotate(-36, 0, 0, Space.Self);
+        rulerToIntKeeper[ruler] += 1;
+        if (rulerToIntKeeper[ruler] > 9)
         {
-            ruler.transform.Rotate(-36, 0, 0, Space.Self);
-            rulerToIntKeeper[ruler] += 1;
-            if (rulerToIntKeeper[ruler] > 9)
-            {
-                rulerToIntKeeper[ruler] = 0;
-            }
-            CheckPassword();
+            rulerToIntKeeper[ruler] = 0;
         }
-
-        void CheckPassword()
-        {
-            if    (rulerToIntKeeper[ruller1] == password[0] &&
-                   rulerToIntKeeper[ruller2] == password[1] &&
-                   rulerToIntKeeper[ruller3] == password[2] &&
-                   rulerToIntKeeper[ruller4] == password[3])
-            {
-                print("you won!");
-                isFinished = true;
-                parent.GetComponent<OpenDoor>().RunAnimation();
-                SaveMGStatus();
-            }
-        }
+        CheckPassword();
     }
 
+    void CheckPassword()
+    {
+        if (rulerToIntKeeper[ruller1] == password[0] &&
+               rulerToIntKeeper[ruller2] == password[1] &&
+               rulerToIntKeeper[ruller3] == password[2] &&
+               rulerToIntKeeper[ruller4] == password[3])
+        {
+            print("you won!");
+            isFinished = true;
+            parent.GetComponent<OpenDoor>().RunAnimation();
+            SaveMGStatus();
+        }
+    }
     void SaveMGStatus()
     {
         var saveExists = false;

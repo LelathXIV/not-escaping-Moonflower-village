@@ -12,7 +12,6 @@ public class Teleporter : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             other.transform.position = targetPosition.position;
-            print(targetPosition.position);
             other.gameObject.SetActive(true);
         }
     }

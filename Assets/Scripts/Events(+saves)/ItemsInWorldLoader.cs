@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject.SpaceFighter;
 
 public class ItemsInWorldLoader : MonoBehaviour
 {
@@ -18,16 +19,11 @@ public class ItemsInWorldLoader : MonoBehaviour
 
     public void ObjectIsTaken()
     {
-       // SaveGameManager.CurrentSaveData._listObWorldObjects.Clear();
-
         var thisItem = new ObjectsInWorldSaveData();
         thisItem.isTaken = true;
-        thisItem.name = this.gameObject.name;
-        thisItem.itemInWorldPosition = this.transform.position;
-
+        thisItem.name = gameObject.name;
+        thisItem.itemInWorldPosition = transform.position;
         SaveGameManager.CurrentSaveData._listObWorldObjects.Add(thisItem);
-
-        Destroy(this.gameObject);
     }
 }
 [System.Serializable]

@@ -19,7 +19,7 @@ public class ZoomCamera : MonoBehaviour
 
             RaycastHit hit;
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, 100, 1 << LayerMask.NameToLayer("zoomCamera"))) //everything collectable - to collectable layer
+            if (Physics.Raycast(ray, out hit, 10, 1 << LayerMask.NameToLayer("zoomCamera"))) //everything collectable - to collectable layer
             {
                 if (hit.transform)
                 {

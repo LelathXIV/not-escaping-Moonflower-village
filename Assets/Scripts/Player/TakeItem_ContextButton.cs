@@ -6,12 +6,14 @@ using UnityEngine.UI;
 public class TakeItem_ContextButton : MonoBehaviour
 {
     public InventoryObject playerInventory;
-    public GameObject ContextImag_TakeItem;
+    [SerializeField] public GameObject ContextImag_TakeItem;
     public int amount;
     public List<GameObject> itemsToCollect;
+    private Button btn;
 
     void Start()
     {
+        btn = ContextImag_TakeItem.GetComponent<Button>();
         StartCoroutine(LateStart(1f));
     }
 
@@ -36,6 +38,7 @@ public class TakeItem_ContextButton : MonoBehaviour
             print(other.tag);
             itemsToCollect.Add(other.gameObject);
             ContextImag_TakeItem.gameObject.SetActive(true);
+            btn.onClick.AddListener(PickUpItem);
         }
     }
 
@@ -52,9 +55,11 @@ public class TakeItem_ContextButton : MonoBehaviour
     {
         //add pick-up effect here
         //сохранять состояние объекта в itemActionText
-        foreach(GameObject item in itemsToCollect)
+        btn.onClick.RemoveListener(PickUpItem); //может быть прблема в листенере и его удалении
+
+        for (int i = 0; i < itemsToCollect.Count; i++)
         {
-            item.GetComponent<Items_InWorld>().AddToInventory();
+            itemsToCollect[i].GetComponent<Items_InWorld>().AddToInventory();
         }
         itemsToCollect.Clear();
         ContextImag_TakeItem.gameObject.SetActive(false);

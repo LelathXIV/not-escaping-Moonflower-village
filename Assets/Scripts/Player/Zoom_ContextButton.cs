@@ -20,13 +20,10 @@ public class Zoom_ContextButton : MonoBehaviour
     private void Awake()
     {
         btn = contextActionButton.GetComponent<Button>();
-
         ContextImag_zoomIn.gameObject.SetActive(false);
-
         zoomUI.SetActive(false);
         screenJoyStick = GameObject.FindGameObjectWithTag("ScreenJoyStick");
     }
-
     private void OnTriggerEnter(Collider other) //add/change context image (later/if)
     {
         //entering zoom zone
@@ -47,30 +44,28 @@ public class Zoom_ContextButton : MonoBehaviour
             btn.onClick.RemoveAllListeners();
         }
     }
-
-    private void TurnZoomOn()
+    public void TurnZoomOn()
     {
-        playerBody.gameObject.SetActive(false); //turns off player body for zoom
+        playerBody.SetActive(false); //turns off player body for zoom
+        GetComponent<CharacterController>().radius = 0;
         GetComponent<PlayerController>().activeCamera.gameObject.SetActive(false);
-        zoomCamera.gameObject.SetActive(true);
-        screenJoyStick.gameObject.SetActive(false);
-        zoomUI.gameObject.SetActive(true);
+        zoomCamera.SetActive(true);
+        screenJoyStick.SetActive(false);
         contextActionButton.SetActive(false);
         closeZoom = zoomUI.transform.Find("CloseZoom").gameObject;
         closeZoom.GetComponent<Button>().onClick.AddListener(CloseZoom);
+        zoomUI.SetActive(true);
         isInZoom = true;
     }
-
     public void CloseZoom()
     {
-
-        playerBody.gameObject.SetActive(true); //turns back on the player body
+        playerBody.SetActive(true); //turns back on the player body
+        GetComponent<CharacterController>().radius = 0.2f;
         GetComponent<PlayerController>().activeCamera = currentSceneCamera;
         GetComponent<PlayerController>().activeCamera.gameObject.SetActive(true);
-        zoomCamera.gameObject.SetActive(false);
-        screenJoyStick.gameObject.SetActive(true);
-        zoomUI.gameObject.SetActive(false);
-        contextActionButton.SetActive(true);
+        zoomCamera.SetActive(false);
+        screenJoyStick.SetActive(true);
+        zoomUI.SetActive(false);
         isInZoom = false;
     }
 

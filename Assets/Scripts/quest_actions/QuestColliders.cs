@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.LowLevel;
 
 
 public class QuestColliders : MonoBehaviour
@@ -13,24 +14,26 @@ public class QuestColliders : MonoBehaviour
     public List<string> hints; //on click texts
     public Animator anim;
     public AnimationClip animationClip;
-    public GameObject zoomUI;
     float timeBeforeSuicide;
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         anim = targetObject.GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player");
         for (int i = 0; i < SaveGameManager.CurrentSaveData._questCollidersSaveDatas.Count; i++)
         {
-            if (SaveGameManager.CurrentSaveData._questCollidersSaveDatas[i].position == this.transform.position &&
+            if (SaveGameManager.CurrentSaveData._questCollidersSaveDatas[i].finalPosition == transform.position &&
                 SaveGameManager.CurrentSaveData._questCollidersSaveDatas[i].expectedItemUsed == true)
+            {
+                anim.speed = 10;
                 RunAnimation();
+            }
         }
     }
 
     public void CheckIfItemIsInInventory()
     {
-        if(expectedItem != null)
+        if (expectedItem != null)
         {
             for (int i = 0; i < inventory.Container.Count; i++)
             {
@@ -38,8 +41,8 @@ public class QuestColliders : MonoBehaviour
                 {
                     inventory.RemoveItem(inventory.Container[i].item, 1);
                     player.GetComponent<PlayerSaveEvents>().SaveInventory();
-                    RunAnimation();
                     KeyItemUsed();
+                    RunAnimation();
                 }
             }
         }
@@ -49,16 +52,25 @@ public class QuestColliders : MonoBehaviour
     public void RunAnimation()
     {
         timeBeforeSuicide = animationClip.length;
+        anim = targetObject.GetComponent<Animator>();
         anim.SetTrigger("Active");
-        zoomUI.SetActive(false);
+        var playerZoom = player.GetComponent<Zoom_ContextButton>();
+        if (playerZoom.isInZoom)
+        {
+            playerZoom.zoomUI.gameObject.SetActive(false);
+        }
         StartCoroutine(Suicide());
     }
 
     IEnumerator Suicide()
     {
         yield return new WaitForSeconds(timeBeforeSuicide);
-        zoomUI.SetActive(true);
-        Destroy(this.gameObject);
+        var playerZoom = player.GetComponent<Zoom_ContextButton>();
+        if (playerZoom.isInZoom)
+        {
+            playerZoom.zoomUI.gameObject.SetActive(true);
+        }
+        Destroy(gameObject);
     }
 
     public void KeyItemUsed()
@@ -69,10 +81,10 @@ public class QuestColliders : MonoBehaviour
 
     public void SaveQuestColliderData()
     {
-        var QuestCollidersSaveData = new QuestCollidersSaveData();
-        QuestCollidersSaveData.position = transform.position;
-        QuestCollidersSaveData.expectedItemUsed = expectedItemUsed;
-        SaveGameManager.CurrentSaveData._questCollidersSaveDatas.Add(QuestCollidersSaveData);
+        var QuestCollidersSave = new QuestCollidersSaveData();
+        QuestCollidersSave.finalPosition = transform.position;
+        QuestCollidersSave.expectedItemUsed = expectedItemUsed;
+        SaveGameManager.CurrentSaveData._questCollidersSaveDatas.Add(QuestCollidersSave);
         SaveGameManager.SaveGame();
     }
 }
@@ -81,5 +93,5 @@ public class QuestColliders : MonoBehaviour
 public class QuestCollidersSaveData
 {
     public bool expectedItemUsed;
-    public Vector3 position;
+    public Vector3 finalPosition;
 }

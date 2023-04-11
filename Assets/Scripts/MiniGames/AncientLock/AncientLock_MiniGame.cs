@@ -69,7 +69,7 @@ public class AncientLock_MiniGame : MonoBehaviour
         {
             RaycastHit hit;
             Ray ray = thisZoomCamera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, 100, 1 << LayerMask.NameToLayer("zoomCamera")) && !isRotatingRight && !isRotatingLeft) 
+            if (Physics.Raycast(ray, out hit, 10, 1 << LayerMask.NameToLayer("zoomCamera")) && !isRotatingRight && !isRotatingLeft) 
             {
                 if (hit.transform == turnRight.transform) //если попал по правой кнопке или попал по правой кнопке - делаем механику
                 {

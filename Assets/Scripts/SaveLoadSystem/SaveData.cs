@@ -5,9 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData 
 {
-    //store data here
-    public PlayerSaveData _playerSaveData = new PlayerSaveData();
-
     //list of all takable gameobjects laying in the world
     public List<ObjectsInWorldSaveData> _listObWorldObjects = new List<ObjectsInWorldSaveData>();
 
@@ -42,5 +39,11 @@ public class SaveData
     //list on contextActionColliders
 
     public List<ContextQuestColliderSaveData> _contextQuestColliders = new List<ContextQuestColliderSaveData>();
+
+    //train save data
+    public TrainSaveData _trainSaveData;
+
+    //door info
+    public List<DoorsSaveData> _doorsSaveData = new List<DoorsSaveData>();
 }
 
