@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -11,23 +9,33 @@ public class EnemyHealth : MonoBehaviour
 
     private void Update()
     {
-        if(enemyCurrentHealth <= 0)
+        if (enemyCurrentHealth <= 0 && GetComponent<Enemy>().isAlive)
         {
-            GetComponent<Enemy>().isAlive = false;
-            GetComponent<MeshRenderer>().material.color = Color.red;
-        }
-        if(enemyCurrentHealth < enemyMaxHealth)
-        {
-            GetComponent<Enemy>().BattleModeOn();
+            GetComponent<Enemy>().IsDead();
+            Death();
         }
     }
-    
-    private void OnTriggerEnter(Collider other)
+
+    void Death()
     {
-        if (other.gameObject.tag == "projectile")
-        {
-            enemyCurrentHealth -= playerWeapon.damageValue;
-            print(enemyCurrentHealth);
-        }
+        gameObject.AddComponent<DeathAnimation>().DeathAnimationStarter();
     }
+
+  //IEnumerator LerpScale()
+  //{
+  //    float scaleModifier = 1;
+  //    float time = 0;
+  //    float startValue = scaleModifier;
+  //    var endValue = 0;
+  //    var duration = deathDuration;
+  //    Vector3 startScale = transform.localScale;
+  //    while (time < duration)
+  //    {
+  //        scaleModifier = Mathf.Lerp(startValue, endValue, time / duration);
+  //        transform.localScale = startScale * scaleModifier;
+  //        time += Time.deltaTime;
+  //        yield return null;
+  //    }
+  //    transform.localScale = startScale * endValue;
+  //}
 }

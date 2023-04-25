@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class FadeInFadeOut : MonoBehaviour
 {
     public Image fadeImg;
+    public float fadeSpeed;
 
     private void Start()
     {
@@ -27,7 +28,7 @@ public class FadeInFadeOut : MonoBehaviour
         fadeImg.gameObject.SetActive(true);
 
         var fadingIn = true;
-        float t = 2;
+        float t = fadeSpeed;
         Color c = fadeImg.color;
         fadeImg.color = c;
         while (fadingIn)
@@ -59,7 +60,7 @@ public class FadeInFadeOut : MonoBehaviour
             c.a = t;
             t += Time.deltaTime;
             fadeImg.color = c;
-            if (t > 2)
+            if (t > fadeSpeed)
             {
                 fadingIn = false;
                 print("choo choo");

@@ -32,6 +32,9 @@ public class SceneSwitcher : MonoBehaviour
             case (1):
                 SceneManager.LoadScene("Oak_scene");
                 break;
+            case (2):
+                SceneManager.LoadScene("Lukomorie");
+                break;
         }
     }
 }

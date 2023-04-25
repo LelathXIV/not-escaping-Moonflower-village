@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 public class PlayerWeapon : MonoBehaviour, IPlayerWeapon
 {
@@ -26,14 +24,13 @@ public class PlayerWeapon : MonoBehaviour, IPlayerWeapon
 
     public void Fire() //get ITEM here
     {
-         GameObject bullet = Instantiate(currentWeaponItem.bulletPrefab);
-         Physics.IgnoreCollision(bullet.GetComponent<Collider>(), bulletSpawn.parent.GetComponent<Collider>());
+       //  GameObject bullet = Instantiate(currentWeaponItem.bulletPrefab, new Quaternion());
+         GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.transform.position, Quaternion.LookRotation(bulletSpawn.transform.forward));
+        //Physics.IgnoreCollision(bullet.GetComponent<Collider>(), bulletSpawn.parent.GetComponent<Collider>());
          bullet.transform.position = bulletSpawn.position;
-         
-         Vector3 rotation = bullet.transform.rotation.eulerAngles;
-         bullet.transform.rotation = Quaternion.Euler(rotation.x, transform.eulerAngles.y, rotation.z);
-         bullet.GetComponent<Rigidbody>().AddForce(bulletSpawn.forward * bulletSpeed, ForceMode.Impulse);
 
+         bullet.GetComponent<Rigidbody>().AddForce(bulletSpawn.forward * bulletSpeed, ForceMode.Impulse);
+         bullet.GetComponent<BulletBehaviour>().DamageValue = damageValue;
          StartCoroutine(DestroyBulletAfterTime(bullet, lifeTime));
     }
 
@@ -89,8 +86,6 @@ public class PlayerWeapon : MonoBehaviour, IPlayerWeapon
         }
 
         bulletsInMagazine = currentWeaponItem.magazineCapacity;
-
-
         var weaponSlot = GameObject.FindGameObjectWithTag("weaponSlot").GetComponent<WeaponSlot>();
         weaponSlot.Visual_BulletsTotal(currentWeaponItem);
         weaponSlot.ReloadVisualsOff();

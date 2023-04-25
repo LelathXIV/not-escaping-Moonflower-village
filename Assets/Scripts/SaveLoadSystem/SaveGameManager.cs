@@ -8,7 +8,6 @@ public static class SaveGameManager
 {
     public const string SaveDirectory = "/SaveData/";
     public const string FileName = "SaveGame.oops";
-
     public static SaveData CurrentSaveData = new SaveData();
 
     public static void SaveGame()

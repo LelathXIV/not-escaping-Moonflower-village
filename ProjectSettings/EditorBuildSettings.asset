@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Oak_Scene.unity
     guid: 985e5c949e0b70c4d98f9638e7ad2dcb
+  - enabled: 1
+    path: Assets/Scenes/Lukomorie.unity
+    guid: 69a5bc888d873194eb98875b80b535e6
   m_configObjects: {}

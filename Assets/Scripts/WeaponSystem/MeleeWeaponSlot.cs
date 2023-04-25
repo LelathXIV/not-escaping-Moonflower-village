@@ -15,7 +15,6 @@ public class MeleeWeaponSlot : MonoBehaviour
     private InventoryObject playerInventory;
     public ItemObject currentMeleeWeapon;
 
-
     private void Start()
     {
         playerInventory = Resources.Load("PlayerInventory") as InventoryObject;

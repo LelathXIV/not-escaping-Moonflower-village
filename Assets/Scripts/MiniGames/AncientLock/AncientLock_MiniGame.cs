@@ -185,10 +185,10 @@ public class AncientLock_MiniGame : MonoBehaviour
         }
         mgStarted = true;
         keyObject.SetActive(true);
-        SaveMG();
+        SaveMGCheck();
     }
 
-    void SaveMG()
+    void SaveMGCheck()
     {
         var saveExists = false;
         for (int i = 0; i < SaveGameManager.CurrentSaveData._ancientChestMGsSaveDatas.Count; i++)
@@ -196,17 +196,26 @@ public class AncientLock_MiniGame : MonoBehaviour
             if (SaveGameManager.CurrentSaveData._ancientChestMGsSaveDatas[i].chestCoordinates == transform.position)
             {
                 saveExists = true;
+                if(mgFinished)
+                {
+                    SaveMG();
+                }
             }
         }
         if(!saveExists)
         {
-            var thisMGSaveData = new AncientChestMGsSaveData();
-            thisMGSaveData.chestCoordinates = transform.position;
-            thisMGSaveData.MGstarted = mgStarted;
-            thisMGSaveData.MGfinished = mgFinished;
-            SaveGameManager.CurrentSaveData._ancientChestMGsSaveDatas.Add(thisMGSaveData);
-            SaveGameManager.SaveGame();
+            SaveMG();
         }
+    }
+
+    void SaveMG()
+    {
+        var thisMGSaveData = new AncientChestMGsSaveData();
+        thisMGSaveData.chestCoordinates = transform.position;
+        thisMGSaveData.MGstarted = mgStarted;
+        thisMGSaveData.MGfinished = mgFinished;
+        SaveGameManager.CurrentSaveData._ancientChestMGsSaveDatas.Add(thisMGSaveData);
+        SaveGameManager.SaveGame();
     }
 }
 

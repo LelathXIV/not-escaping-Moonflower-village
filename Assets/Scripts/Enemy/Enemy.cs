@@ -1,31 +1,56 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
     public GameObject playerGameobject;
+    public EnemyAnimationController enemyAnimationController;
     public NavMeshAgent agent;
-    public Vector3 startPosition;
+    public Vector3 StartPosition;
     public bool isDelaying;
     public bool imFighting;
-    public bool isAttacking;
     public bool isAlive;
     public float timerOfSight;
-    public float followingPlayerIfOutOfSight;
+    public float followingTimer;
     public float viewFieldDistance;
     public float attackRange;
     public float attacDamageValue;
     public float attacDelay;
-    public float attacAnimationTime;
-
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         playerGameobject = GameObject.FindGameObjectWithTag("Player");
-        startPosition = transform.position;
         isAlive = true;
+        enemyAnimationController = GetComponent<EnemyAnimationController>();
+        StartPosition = transform.position;
+    }
+
+    public void Idling()
+    {
+        isInFront();
+        isInSight();
+        enemyAnimationController.Idle();
+    }
+
+    public bool isInSight()
+    {
+      //RaycastHit hit;
+      //PHYSYCS RAYCAST DOEST SEE CHARACTER CONTROLLER (>_<)`
+      //Vector3 directionOfPlayer = playerGameobject.transform.position - transform.position;
+      //if (Physics.Raycast(transform.position, directionOfPlayer, out hit, 5000f))
+      //{
+      //    if (hit.rigidbody.transform.tag == "Player")
+      //    {
+      //        Debug.DrawLine(transform.position, playerGameobject.transform.position, Color.red);
+      //        return true;
+      //    }
+      //}
+        if(Vector3.Distance(playerGameobject.transform.position, transform.position) < viewFieldDistance)
+        {
+            return true;
+        }
+        return false;
     }
 
     public bool isInFront()
@@ -35,23 +60,7 @@ public class Enemy : MonoBehaviour
 
         if (Mathf.Abs(angle) > 90 && Mathf.Abs(angle) < 270)
         {
-            Debug.DrawLine(this.transform.position, playerGameobject.transform.position, Color.red);
             return true;
-        }
-        return false;
-    }
-
-    public bool isInSight()
-    {
-        RaycastHit hit;
-        Vector3 directionOfPlayer = playerGameobject.transform.position - transform.position;
-        if (Physics.Raycast(transform.position, directionOfPlayer, out hit, viewFieldDistance))
-        {
-            if (hit.transform.tag == "Player")
-            {
-                Debug.DrawLine(transform.position, playerGameobject.transform.position, Color.green);
-                return true;
-            }
         }
         return false;
     }
@@ -66,7 +75,7 @@ public class Enemy : MonoBehaviour
             LookAtPlayer();
         }
     }
-    public void BattleModeOf()
+    public void BattleModeOff()
     {
         imFighting = false;
         playerGameobject.GetComponent<BattleMode>().listOfEnemies.Remove(transform);
@@ -76,6 +85,7 @@ public class Enemy : MonoBehaviour
     {
         playerGameobject.GetComponent<BattleMode>().listOfEnemies.Remove(transform);
         isAlive = false;
+        agent.isStopped = true;
     }
     public void LookAtPlayer()
     {
@@ -91,10 +101,5 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(attacDelay);
         isDelaying = false;
-    }
-    public void ReturnToStartPosition()
-    {
-        agent.SetDestination(startPosition);
-        agent.isStopped = true;
     }
 }

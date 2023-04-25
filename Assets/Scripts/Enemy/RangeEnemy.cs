@@ -13,25 +13,6 @@ public class RangeEnemy : Enemy
     {
         if (isAlive)
         {
-            isInFront();
-            isInSight();
-            if (isInSight() && isInFront() && !imFighting)
-            {
-                timerOfSight = 0;
-                BattleModeOn();
-                LookAtPlayer();
-            }
-            else if (!isInSight() && imFighting)
-            {
-                agent.SetDestination(playerGameobject.transform.position);
-                timerOfSight += Time.deltaTime;
-                if (timerOfSight >= followingPlayerIfOutOfSight)
-                {
-                    BattleModeOf();
-                    ReturnToStartPosition();
-                }
-            }
-
             if (imFighting)
             {
                 distance = Vector3.Distance(this.transform.position, playerGameobject.transform.position);
@@ -39,7 +20,7 @@ public class RangeEnemy : Enemy
                 {
                     agent.isStopped = true;
                     LookAtPlayer();
-                    StartCoroutine(attac());
+                   // StartCoroutine(attac());
                 }
                 else agent.isStopped = false;
             }
@@ -47,25 +28,25 @@ public class RangeEnemy : Enemy
         else IsDead();
     }
 
-    IEnumerator attac()
-    {
-        if (isDelaying != true)
-        {
-            {
-                isAttacking = true;
-                isDelaying = true;
-                var originalColor = GetComponent<MeshRenderer>().material.color;
-                GetComponent<MeshRenderer>().material.color = Color.red;
-                agent.isStopped = true;
-                yield return new WaitForSeconds(attacAnimationTime);
-                agent.isStopped = false;
-                Fire();
-                GetComponent<MeshRenderer>().material.color = originalColor;
-                isAttacking = false;
-                StartCoroutine(ShootDelay());
-            }
-        }
-    }
+   //IEnumerator attac()
+   //{
+   //    if (isDelaying != true)
+   //    {
+   //        {
+   //            isAttacking = true;
+   //            isDelaying = true;
+   //            var originalColor = GetComponent<MeshRenderer>().material.color;
+   //            GetComponent<MeshRenderer>().material.color = Color.red;
+   //            agent.isStopped = true;
+   //            yield return new WaitForSeconds(0);
+   //            agent.isStopped = false;
+   //            Fire();
+   //            GetComponent<MeshRenderer>().material.color = originalColor;
+   //            isAttacking = false;
+   //            StartCoroutine(ShootDelay());
+   //        }
+   //    }
+   //}
 
     public void Fire() 
     {

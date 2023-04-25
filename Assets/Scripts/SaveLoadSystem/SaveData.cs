@@ -45,5 +45,14 @@ public class SaveData
 
     //door info
     public List<DoorsSaveData> _doorsSaveData = new List<DoorsSaveData>();
+
+    //save scene
+    public int currentlyPlayableScene;
+    public bool isInAstral;
+
+    //player stats save data
+    public float currentPlayerHP;
+    public float MAXplayerHP;
+    public bool gameStarted;
 }
 

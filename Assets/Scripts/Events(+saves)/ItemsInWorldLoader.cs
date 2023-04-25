@@ -24,6 +24,8 @@ public class ItemsInWorldLoader : MonoBehaviour
         thisItem.name = gameObject.name;
         thisItem.itemInWorldPosition = transform.position;
         SaveGameManager.CurrentSaveData._listObWorldObjects.Add(thisItem);
+        var player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<PlayerSaveEvents>().SaveInventory();
     }
 }
 [System.Serializable]

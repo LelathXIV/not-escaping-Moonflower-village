@@ -9,12 +9,11 @@ public class BattleMode : MonoBehaviour
     public Transform enemy;
     public List<Transform> listOfEnemies;
 
-
     //выключить весь UI кроме боевого (слот оружия и этот слот) если в бою
 
     private void Update()
     {
-        if(listOfEnemies.Count == 0)
+        if (listOfEnemies.Count == 0)
         {
             isInBattle = false;
         }
@@ -22,6 +21,7 @@ public class BattleMode : MonoBehaviour
         {
             isInBattle = true;
             FindNearestEnemy();
+            EnemyInFront();
         }
     }
 
@@ -46,5 +46,18 @@ public class BattleMode : MonoBehaviour
         lookPos.y = 0;
         var rotation = Quaternion.LookRotation(lookPos);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * damping);
+    }
+
+    public bool EnemyInFront()
+    {
+        Vector3 directionOfEnemy = transform.position - enemy.transform.position;
+        float angle = Vector3.Angle(transform.forward, directionOfEnemy);
+
+        if (Mathf.Abs(angle) > 90 && Mathf.Abs(angle) < 270)
+        {
+            Debug.DrawLine(transform.position, enemy.transform.position, Color.green);
+            return true;
+        }
+        return false;
     }
 }

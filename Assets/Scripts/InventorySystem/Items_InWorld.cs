@@ -16,14 +16,14 @@ public class Items_InWorld : MonoBehaviour
     public GameObject canvas;
     private Transform pickedItemsImages;
     private ItemsInWorldLoader itemsInWorldLoader;
-    public GameObject[] player;
+    public GameObject player;
 
     private void Start()
     {
         canvas = GameObject.FindGameObjectWithTag("canvas");
         pickedItemsImages = canvas.transform.Find("pickedItemsImages");
         itemsInWorldLoader = GetComponent<ItemsInWorldLoader>();
-        player = GameObject.FindGameObjectsWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
     public void AddToInventory()
     {

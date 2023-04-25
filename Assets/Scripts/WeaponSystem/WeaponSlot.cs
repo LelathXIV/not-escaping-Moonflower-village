@@ -7,16 +7,15 @@ using Zenject;
 
 public class WeaponSlot : MonoBehaviour
 {
+    [Inject] IPlayerWeapon playerWeapon;
     public GameObject currentWeaponImage;
     public Image reloadVisual;
     public GameObject reloadVisualTimer;
     public float reloadingTime;
     public bool isReloading;
-
     public GameObject bulletsTotal;
     public GameObject magazineCapacity;
     private InventoryObject playerInventory;
-    [Inject] IPlayerWeapon playerWeapon;
     private ItemObject currentWeapon;
 
     private void Start()
@@ -31,7 +30,6 @@ public class WeaponSlot : MonoBehaviour
                     currentWeapon = playerInventory.Container[i].item;
                 }
             }
-            playerWeapon.GetWeapon(currentWeapon);
             Visual_MagazineCapacity();
             Visual_BulletsTotal(currentWeapon);
             AssignWeapon(currentWeapon);
@@ -52,7 +50,7 @@ public class WeaponSlot : MonoBehaviour
     public void AssignWeapon(ItemObject item)
     {
         playerWeapon.bulletsInMagazine = item.magazineCapacity;
-        playerWeapon.GetWeapon(item);
+        playerWeapon.GetWeapon(item); //useless
         currentWeaponImage.GetComponent<Image>().sprite = item.prefabForInventory.GetComponent<Image>().sprite;
         Visual_BulletsTotal(item);
     }

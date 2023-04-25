@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject.SpaceFighter;
 
 public class OnArriving : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class OnArriving : MonoBehaviour
 
     IEnumerator TurnOnTrainZoom()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         var playerZoom = player.GetComponent<Zoom_ContextButton>();
         var zoomCamera = trainZoom.transform.Find("Camera");
         playerZoom.zoomCamera = zoomCamera.gameObject;

@@ -1,18 +1,22 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
-using UnityEngine.AI;
-using UnityEngine.PlayerLoop;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class MeleeEnemy : Enemy
 {
+    public float simpleAttackCD;
+    public bool _simpleAttackCD;
+    public float heavyAttackCD; //for more abilities make dict of list
+    public bool _heavyAttackCD;
+    public float heavyAtackMultiplier;
+    float distance;
     private void Update()
     {
         if (isAlive)
         {
-            isInFront();
-            isInSight();
+            distance = Vector3.Distance(this.transform.position, playerGameobject.transform.position);
+
+            Idling(); //add idle route
             if (isInSight() && isInFront() && !imFighting)
             {
                 timerOfSight = 0;
@@ -22,47 +26,94 @@ public class MeleeEnemy : Enemy
             else if (!isInSight() && imFighting)
             {
                 timerOfSight += Time.deltaTime;
-                if (timerOfSight >= followingPlayerIfOutOfSight)
+                if (timerOfSight >= followingTimer)
                 {
-                    BattleModeOf();
-                    ReturnToStartPosition();
+                    timerOfSight = 0;
+                    agent.isStopped = true;
+                    BattleModeOff();
                 }
             }
-            if(imFighting)
+            if(imFighting == true && !isDelaying)
             {
-                agent.SetDestination(playerGameobject.transform.position);
-
-                float distance = Vector3.Distance(this.transform.position, playerGameobject.transform.position);
-
-                if (distance <= attackRange)
-                    StartCoroutine(attac());
+                if (_simpleAttackCD && _heavyAttackCD)
+                {
+                    agent.isStopped = true;
+                    enemyAnimationController.Idle();
+                    LookAtPlayer();
+                }
+                else 
+                {
+                    if (distance > attackRange)
+                    {
+                        GoToPlayer();
+                        enemyAnimationController.Run();
+                        agent.isStopped = false;
+                    }
+                    AttacAbilities();
+                }
             }
         }
         else IsDead();
-    }
+    }  
 
-    IEnumerator attac()
+    void AttacAbilities()
     {
-        if (isDelaying != true)
+        if (distance <= attackRange)
         {
+            if (!_heavyAttackCD)
             {
-                isAttacking = true;
-                isDelaying = true;
-                var originalColor = GetComponent<MeshRenderer>().material.color;
-                GetComponent<MeshRenderer>().material.color = Color.red;
-                agent.isStopped = true;
-                yield return new WaitForSeconds(attacAnimationTime);
-                float distanceNew = Vector3.Distance(this.transform.position, playerGameobject.transform.position);
-                if (distanceNew <= attackRange)
-                {
-                    playerGameobject.GetComponent<PlayerStats>().playerCurrentHealth -= attacDamageValue;
-                    print(playerGameobject.GetComponent<PlayerStats>().playerCurrentHealth);
-                }
-                agent.isStopped = false;
-                GetComponent<MeshRenderer>().material.color = originalColor;
-                isAttacking = false;
-                StartCoroutine(ShootDelay());
+                StartCoroutine(HeavyAtack());
             }
+            if (!_simpleAttackCD && _heavyAttackCD && !isDelaying)
+            { StartCoroutine(SimpleAtack()); }
         }
     }
+
+    void GoToPlayer()
+    {
+        agent.SetDestination(playerGameobject.transform.position);
+    }
+
+    IEnumerator SimpleAtack()
+    {
+        agent.isStopped = true;
+        _simpleAttackCD = true;
+        enemyAnimationController.Attack_1();
+        isDelaying = true;
+        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(enemyAnimationController.interactionLength);
+        float distanceNew = Vector3.Distance(this.transform.position, playerGameobject.transform.position);
+        if (distanceNew <= attackRange)
+        {
+            playerGameobject.GetComponent<PlayerStats>().GetHit(attacDamageValue);
+        }
+        agent.isStopped = false;
+        StartCoroutine(ShootDelay());
+        yield return new WaitForSeconds(simpleAttackCD);
+        _simpleAttackCD = false;
+        StopCoroutine(SimpleAtack());
+    }
+
+    IEnumerator HeavyAtack()
+    {
+        agent.isStopped = true;
+        _heavyAttackCD = true;
+        isDelaying = true;
+        _simpleAttackCD = true;
+        enemyAnimationController.Attack_2();
+        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(enemyAnimationController.interactionLength);
+        float distanceNew = Vector3.Distance(this.transform.position, playerGameobject.transform.position);
+        if (distanceNew <= attackRange)
+        {
+            playerGameobject.GetComponent<PlayerStats>().GetHit(attacDamageValue * heavyAtackMultiplier);
+        }
+        agent.isStopped = false;
+        _simpleAttackCD = false;
+        StartCoroutine(ShootDelay());
+        yield return new WaitForSeconds(heavyAttackCD);
+        _heavyAttackCD = false;
+        StopCoroutine(HeavyAtack());
+    }
+
 }

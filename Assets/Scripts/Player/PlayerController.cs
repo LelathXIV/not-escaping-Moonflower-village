@@ -14,10 +14,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float gravityValue = -9.81f;
     [Inject] private IGamePauseService gamePause;
-    private Animator playerAnimator;
     public Camera activeCamera;
     public PlayerShootingSystem playerShootingSystem;
     public BattleMode battleMode;
+    public PlayerAnimations playerAnimations;
 
     private Vector3 right;
     private Vector3 forward;
@@ -26,8 +26,7 @@ public class PlayerController : MonoBehaviour
     {
         playerInput = new JoystickController();
         controller = GetComponent<CharacterController>();
-        playerAnimator = GetComponentInChildren<Animator>();
-
+        playerAnimations = GetComponent<PlayerAnimations>();
         //finding active camera
         activeCamera = (Camera)FindObjectOfType(typeof(Camera));
         playerShootingSystem = GetComponent<PlayerShootingSystem>();
@@ -37,71 +36,54 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Move();
-
         //finding active camera runtime
         activeCamera = (Camera)FindObjectOfType(typeof(Camera));
     }
 
     private void Move()
-    {
-        if (gamePause.isFrozen == false)
+    { 
+        if (gamePause.isFrozen == false && !playerAnimations.isInteracting)//makes animations uninterruptable
         {
             groundedPlayer = controller.isGrounded;
             if (groundedPlayer && playerVelocity.y < 0)
             {
                 playerVelocity.y = 0f;
             }
-   
             Vector2 movementInput = playerInput.JSController.Move.ReadValue<Vector2>();
             Vector3 move = Vector3.zero;
-
             if (movementInput == Vector2.zero)
             {
                 right = Vector3.Cross(Vector3.up, activeCamera.transform.forward);
                 forward = Vector3.Cross(right, Vector3.up);
             }
-
             move = (right * movementInput.x) + (forward * movementInput.y);
-
             //camera recalculations - correcting axises
 
-
-            if (move != Vector3.zero)
+            if (move != Vector3.zero )
             {
                 //walking happens here!!
                 playerShootingSystem.StopAiming();
                 gameObject.transform.forward = move;
-                Walk();
+                if(battleMode.isInBattle) {playerAnimations.Run(); }
+                if(!battleMode.isInBattle) { playerAnimations.Walk(); }
             }
             else if(move == Vector3.zero)
             {
-                Idle();
-                if (battleMode.isInBattle == true)
+                playerAnimations.Idle();
+
+                if (battleMode.isInBattle == true && battleMode.EnemyInFront())
                 {
                     battleMode.LookAtTargetEnemy();
                 }
+                if (playerShootingSystem.isAiming && !playerShootingSystem.isReloading)
+                {
+                    playerAnimations.Aiming();
+                }
             }
-
             controller.Move(move * Time.deltaTime * playerSpeed);
             playerVelocity.y += gravityValue * Time.deltaTime;
             controller.Move(playerVelocity * Time.deltaTime);
         }
-    }
-     
-    //animation
-    private void Idle()
-    {
-        playerAnimator.SetFloat("speed", 0);
-    }
-    //animation
-    private void Walk()
-    {
-        playerAnimator.SetFloat("speed", 0.5f);
-    }
-    //animation
-    private void Run()
-    {
-        playerAnimator.SetFloat("speed", 1);
     }
 
     private void OnEnable()

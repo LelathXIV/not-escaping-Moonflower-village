@@ -23,16 +23,17 @@ TagManager:
   - meleeWeaponSlot
   - miniGame
   - openable
+  - totem
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - enemy
   - Water
   - UI
   - zoomCamera
   - projectiles
-  - playerLayer
+  - obstacle
   - 
   - 
   - 

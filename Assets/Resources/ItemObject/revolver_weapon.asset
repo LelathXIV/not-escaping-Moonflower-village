@@ -26,5 +26,5 @@ MonoBehaviour:
   reloadSpeed: 5
   bulletStootDelay: 1
   magazineCapacity: 6
-  aimingTime: 3
-  weaponRange: 350
+  aimingTime: 2
+  weaponRange: 500

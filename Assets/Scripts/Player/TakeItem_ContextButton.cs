@@ -56,7 +56,7 @@ public class TakeItem_ContextButton : MonoBehaviour
         //add pick-up effect here
         //сохранять состояние объекта в itemActionText
         btn.onClick.RemoveListener(PickUpItem); //может быть прблема в листенере и его удалении
-
+        GetComponent<PlayerAnimations>().Gather();
         for (int i = 0; i < itemsToCollect.Count; i++)
         {
             itemsToCollect[i].GetComponent<Items_InWorld>().AddToInventory();

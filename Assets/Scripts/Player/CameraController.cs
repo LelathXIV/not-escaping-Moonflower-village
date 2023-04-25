@@ -1,16 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
     public Transform player;
-
     public Vector3 cameraOffset;
 
     public void Start()
     {
-        cameraOffset = transform.position - player.transform.position;
+        cameraOffset = new Vector3(0, 15, -7);
     }
 
     private void LateUpdate()
