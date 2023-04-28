@@ -74,7 +74,6 @@ public class MoveRuller : MonoBehaviour
                 }
             }
         }
-        
     }
     void RotateRulers(GameObject ruler)
     {

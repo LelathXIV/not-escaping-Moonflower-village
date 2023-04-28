@@ -15,6 +15,7 @@ public class Zoom_ContextButton : MonoBehaviour
     private GameObject closeZoom;
     public InventoryObject playerInventory;
     public GameObject playerBody;
+    public List<GameObject> UIElements;
     public bool isInZoom;
 
     private void Awake()
@@ -50,8 +51,10 @@ public class Zoom_ContextButton : MonoBehaviour
         GetComponent<CharacterController>().radius = 0;
         GetComponent<PlayerController>().activeCamera.gameObject.SetActive(false);
         zoomCamera.SetActive(true);
-        screenJoyStick.SetActive(false);
-        contextActionButton.SetActive(false);
+        for (int i = 0; i < UIElements.Count; i++)
+        {
+            UIElements[i].gameObject.SetActive(false);
+        }
         closeZoom = zoomUI.transform.Find("CloseZoom").gameObject;
         closeZoom.GetComponent<Button>().onClick.AddListener(CloseZoom);
         zoomUI.SetActive(true);
@@ -63,8 +66,11 @@ public class Zoom_ContextButton : MonoBehaviour
         GetComponent<CharacterController>().radius = 0.2f;
         GetComponent<PlayerController>().activeCamera = currentSceneCamera;
         GetComponent<PlayerController>().activeCamera.gameObject.SetActive(true);
+        for (int i = 0; i < UIElements.Count; i++)
+        {
+            UIElements[i].gameObject.SetActive(true);
+        }
         zoomCamera.SetActive(false);
-        screenJoyStick.SetActive(true);
         zoomUI.SetActive(false);
         isInZoom = false;
     }

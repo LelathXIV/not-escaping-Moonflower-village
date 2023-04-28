@@ -15,6 +15,7 @@ public class QuestColliders : MonoBehaviour
     public Animator anim;
     public AnimationClip animationClip;
     float timeBeforeSuicide;
+    public List<GameObject> rewards;
 
     private void Start()
     {
@@ -70,7 +71,17 @@ public class QuestColliders : MonoBehaviour
         {
             playerZoom.zoomUI.gameObject.SetActive(true);
         }
+        ShowRewards();
         Destroy(gameObject);
+    }
+
+    void ShowRewards()
+    {
+        for (int i = 0; i < rewards.Count; i++)
+        {
+            if (rewards[i] != null)
+            rewards[i].SetActive(true);
+        }
     }
 
     public void KeyItemUsed()

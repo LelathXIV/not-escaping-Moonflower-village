@@ -1454,7 +1454,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7587240090480060295}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2843,7 +2843,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7587240090480060295}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4204,7 +4204,7 @@ RectTransform:
   - {fileID: 7587240089847852647}
   - {fileID: 7587240089865975683}
   m_Father: {fileID: 7587240090480060295}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5094,8 +5094,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88992bb4dac69b248acd164e730f2e55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageValue: 0
   aimingTimer: 0
+  damageValue: 0
   isAiming: 0
   aimingUI: {fileID: 7587240090213744435}
   aimingLine: {fileID: 7587240090302265580}
@@ -5117,6 +5117,9 @@ MonoBehaviour:
   playerMaxHealth: 0
   playerCurrentHealth: 0
   aimingSpeedBoost: 1
+  playerMeleDamage: 0
+  playerGunDamage: 0
+  died: 0
 --- !u!114 &7587240090225784564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5150,6 +5153,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: 92a7cc49036b4274bb7c86b4e891b2ec, type: 2}
+  SceneNumber: 0
+  isInLukomorie: 0
+  thisLocationTotem: {fileID: 0}
 --- !u!114 &7587240090225784566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5224,6 +5230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeImg: {fileID: 7587240089190860137}
+  fadeSpeed: 0
 --- !u!114 &5080297765363669619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5873,13 +5880,13 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7587240090367259623}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7587240090259321208}
   m_Father: {fileID: 7587240090480060295}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6131,11 +6138,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7587240090367259620}
   - {fileID: 7587240089509577377}
   - {fileID: 7587240089710720802}
   - {fileID: 7587240089909569087}
   - {fileID: 7587240090711028066}
-  - {fileID: 7587240090367259620}
   - {fileID: 7587240090528349744}
   - {fileID: 7587240091040747610}
   m_Father: {fileID: 7587240091238394756}
@@ -7123,7 +7130,7 @@ RectTransform:
   - {fileID: 7587240090332932850}
   - {fileID: 7587240089524978595}
   m_Father: {fileID: 7587240090480060295}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51dd9c89af46dfd47ab032a56ff78903, type: 3}
+  m_Name: emblem_piece_scionMG
+  m_EditorClassIdentifier: 
+  prefabForInventory: {fileID: 2912398922761620072, guid: 44c53355fabdb8e4faf7346bb77359e8, type: 3}
+  itemImage: {fileID: 21300000, guid: c90fbca1bb37c1d47868781f9a7557dd, type: 3}
+  type: 6
+  itemName: Piece of old emblem
+  description: This thing I've found in weird puzzle box
+  sellPrice: 0
+  buyPrice: 0
+  healingPotential: 0
+  bulletPrefab: {fileID: 0}
+  bulletItem: {fileID: 0}
+  damageValue: 0
+  reloadSpeed: 0
+  bulletStootDelay: 0
+  magazineCapacity: 0
+  aimingTime: 0
+  weaponRange: 0

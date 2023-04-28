@@ -26730,8 +26730,8 @@ MonoBehaviour:
   - {fileID: 4016808384382871214}
   isLit: 000000000000000000000001
   thisZoomCamera: {fileID: 4016808385513861493}
-  litMaterial: {fileID: 2100000, guid: 1cc08a3f4c4ff4ebb980be82aa6556b9, type: 2}
-  darkMaterial: {fileID: 5345549104973507493, guid: 0cac3bb1727aabc4b99b68a873ede15f, type: 3}
+  litMaterial: {fileID: 6271573414225017425, guid: 6e20dc7970e95ac4bbd69712fc8f2e1b, type: 3}
+  darkMaterial: {fileID: 2100000, guid: d2b89dae86aac9a4d9b52881cf3be975, type: 2}
   scionMGFinished: 0
   isReseting: 0
   rewards: []

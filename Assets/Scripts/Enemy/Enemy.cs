@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,6 +18,17 @@ public class Enemy : MonoBehaviour
     public float attackRange;
     public float attacDamageValue;
     public float attacDelay;
+
+    public float simpleAttackCD;
+    public bool _simpleAttackCD;
+    public float heavyAttackCD; //for more abilities make dict of list
+    public bool _heavyAttackCD;
+    public float heavyAtackMultiplier;
+    public float distance;
+    public bool canAttack;
+    public bool canAttack_simple;
+    public bool canAttack_heavy;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -24,6 +36,73 @@ public class Enemy : MonoBehaviour
         isAlive = true;
         enemyAnimationController = GetComponent<EnemyAnimationController>();
         StartPosition = transform.position;
+    }
+
+    private void Update()
+    {
+        if (isAlive)
+        {
+            distance = Vector3.Distance(this.transform.position, playerGameobject.transform.position);
+
+            Idling(); //add idle route
+            if (isInSight() && isInFront() && !imFighting)
+            {
+                timerOfSight = 0;
+                BattleModeOn();
+                LookAtPlayer();
+            }
+            else if (!isInSight() && imFighting)
+            {
+                timerOfSight += Time.deltaTime;
+                if (timerOfSight >= followingTimer)
+                {
+                    timerOfSight = 0;
+                    agent.isStopped = true;
+                    BattleModeOff();
+                }
+            }
+            if (imFighting == true && !isDelaying)
+            {
+                LookAtPlayer();
+
+                if (_simpleAttackCD && _heavyAttackCD)
+                {
+                    agent.isStopped = true;
+                    enemyAnimationController.Idle();
+                }
+                else
+                {
+                    if (distance > attackRange)
+                    {
+                        GoToPlayer();
+                        enemyAnimationController.Run();
+                        agent.isStopped = false;
+                    }
+                    AttacAbilities();
+                }
+            }
+        }
+        else IsDead();
+    }
+
+    void AttacAbilities()
+    {
+        if (distance <= attackRange)
+        {
+            if (!_heavyAttackCD && !isDelaying && !canAttack_heavy)
+            {
+                canAttack_heavy = true;
+            }
+            if (!_simpleAttackCD && _heavyAttackCD && !isDelaying && !canAttack_simple)
+            {
+                canAttack_simple = true;
+            }
+        }
+    }
+
+    public void GoToPlayer()
+    {
+        agent.SetDestination(playerGameobject.transform.position);
     }
 
     public void Idling()
@@ -80,7 +159,25 @@ public class Enemy : MonoBehaviour
         imFighting = false;
         playerGameobject.GetComponent<BattleMode>().listOfEnemies.Remove(transform);
         timerOfSight = 0;
+        StartCoroutine(GoHome());
     }
+
+    IEnumerator GoHome()
+    {
+        var homeDirection = transform.parent.position;
+        float time = 0;
+        Vector3 startPosition = transform.position;
+        transform.LookAt(homeDirection);
+        while (time < 5)
+        {
+            enemyAnimationController.Run();
+            transform.position = Vector3.Lerp(startPosition, homeDirection, time / 5);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = homeDirection;
+    }
+
     public void IsDead()
     {
         playerGameobject.GetComponent<BattleMode>().listOfEnemies.Remove(transform);

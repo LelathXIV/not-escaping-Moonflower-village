@@ -11,8 +11,8 @@ public class PlayerSaveEvents : MonoBehaviour
 
     private void Awake()
     {
-        if (thisLocationTotem != null)
-            RelocatePlayerToTotem();
+      //if (thisLocationTotem != null)
+      //    RelocatePlayerToTotem();
     }
 
     public void Start()

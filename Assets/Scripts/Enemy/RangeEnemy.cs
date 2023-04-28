@@ -6,60 +6,69 @@ using UnityEngine.AI;
 public class RangeEnemy : Enemy
 {
     public GameObject projectile;
-    public float projectileSpeed;
     public float projectileLifetime;
-    public float distance;
-    private void Update()
+    public float projectileSpeed;
+    public float meleAttackDistance;
+    public GameObject projectileParent;
+
+    public void LateUpdate()
     {
-        if (isAlive)
+        if (canAttack_heavy && distance > meleAttackDistance)
         {
-            if (imFighting)
-            {
-                distance = Vector3.Distance(this.transform.position, playerGameobject.transform.position);
-                if (distance <= attackRange && isInSight())
-                {
-                    agent.isStopped = true;
-                    LookAtPlayer();
-                   // StartCoroutine(attac());
-                }
-                else agent.isStopped = false;
-            }
+            StartCoroutine(RangeAttack()); //heavy attk
+            canAttack_heavy = false;
         }
-        else IsDead();
+        if (canAttack_heavy && distance < meleAttackDistance)
+        {
+            StartCoroutine(MeleAttack()); //simpleAttack
+            canAttack_heavy = false;
+        }
+    }
+    IEnumerator RangeAttack()
+    {
+        agent.isStopped = true;
+        _heavyAttackCD = true;
+        enemyAnimationController.Attack_1();
+        isDelaying = true;
+        yield return new WaitForSeconds(1.5f);
+        StartCoroutine(ShootDelay());
+        yield return new WaitForSeconds(simpleAttackCD);
+        _heavyAttackCD = false;
+        agent.isStopped = false;
+        StopCoroutine(RangeAttack());
     }
 
-   //IEnumerator attac()
-   //{
-   //    if (isDelaying != true)
-   //    {
-   //        {
-   //            isAttacking = true;
-   //            isDelaying = true;
-   //            var originalColor = GetComponent<MeshRenderer>().material.color;
-   //            GetComponent<MeshRenderer>().material.color = Color.red;
-   //            agent.isStopped = true;
-   //            yield return new WaitForSeconds(0);
-   //            agent.isStopped = false;
-   //            Fire();
-   //            GetComponent<MeshRenderer>().material.color = originalColor;
-   //            isAttacking = false;
-   //            StartCoroutine(ShootDelay());
-   //        }
-   //    }
-   //}
+    IEnumerator MeleAttack()
+    {
+        agent.isStopped = true;
+        _simpleAttackCD = true;
+        enemyAnimationController.Attack_2();
+        isDelaying = true;
+        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(enemyAnimationController.interactionLength);
+        float distanceNew = Vector3.Distance(this.transform.position, playerGameobject.transform.position);
+        if (distanceNew <= meleAttackDistance)
+        {
+            playerGameobject.GetComponent<PlayerStats>().GetHit(attacDamageValue);
+        }
+        agent.isStopped = false;
+        StartCoroutine(ShootDelay());
+        yield return new WaitForSeconds(simpleAttackCD);
+        _simpleAttackCD = false;
+        StopCoroutine(MeleAttack());
+    }
 
     public void Fire() 
     {
-        GameObject bullet = Instantiate(projectile);
-        Physics.IgnoreCollision(bullet.GetComponent<Collider>(), GetComponent<Collider>());
-        bullet.transform.position = transform.position;
-
-        Vector3 rotation = bullet.transform.rotation.eulerAngles;
-        bullet.transform.rotation = Quaternion.Euler(rotation.x, transform.eulerAngles.y, rotation.z);
-        bullet.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed, ForceMode.Impulse);
-
+        GameObject bullet = Instantiate(projectile, projectileParent.transform);
+        bullet.transform.position = projectileParent.transform.position;
+        bullet.transform.localScale = new Vector3(0.005f, 0.005f, 0.005f);
+        bullet.GetComponent<GolemProjectileBeh>().ProjectileSpeed = projectileSpeed;
+        bullet.GetComponent<GolemProjectileBeh>().projectileDamage = attacDamageValue * heavyAtackMultiplier;
         StartCoroutine(DestroyBulletAfterTime(bullet, projectileLifetime));
     }
+
+    
     private IEnumerator DestroyBulletAfterTime(GameObject bullet, float delay)
     {
         yield return new WaitForSeconds(delay);

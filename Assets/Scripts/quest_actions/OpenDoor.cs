@@ -10,6 +10,7 @@ public class OpenDoor : MonoBehaviour
     public GameObject player;
     public bool isKeyDoor;
     public bool isOpened;
+    public bool keepZoom;
 
     void Awake()
     {
@@ -55,7 +56,10 @@ public class OpenDoor : MonoBehaviour
     public void RunAnimation()
     {
         animator.SetTrigger("Active");
-        zoomCollider.GetComponent<Collider>().enabled = false;
+        if(!keepZoom)
+        {
+            zoomCollider.GetComponent<Collider>().enabled = false;
+        }
         var playerZoom = player.GetComponent<Zoom_ContextButton>();
         if (playerZoom.isInZoom)
         {

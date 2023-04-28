@@ -29,6 +29,7 @@ public class SaveData
     public List<AncientChestMGsSaveData> _ancientChestMGsSaveDatas = new List<AncientChestMGsSaveData>();
     public List<ScionMGSaveData> _scionMgSaveData = new List<ScionMGSaveData>();
     public List<PadlockMGSaveData> _padlockMGSaveData = new List<PadlockMGSaveData>();
+    public bool gotQuestItemFromPond;
 
     //dialogue triggers
     public List<DialogueTriggersSaveData> _dialogueTriggersSaveData = new List<DialogueTriggersSaveData>();
@@ -37,7 +38,6 @@ public class SaveData
     public List<OpenableObjects> _openableObjects = new List<OpenableObjects>();
 
     //list on contextActionColliders
-
     public List<ContextQuestColliderSaveData> _contextQuestColliders = new List<ContextQuestColliderSaveData>();
 
     //train save data

@@ -46,7 +46,7 @@ public class PlayerStats : MonoBehaviour
 
     public void InitialStats()
     {
-        playerMaxHealth = 100; //add HP boosters here
+        playerMaxHealth = 300; //add HP boosters here
         playerCurrentHealth = playerMaxHealth;
         aimingSpeedBoost = 1; //add boosters here
     }
@@ -61,7 +61,6 @@ public class PlayerStats : MonoBehaviour
         GetComponent<PlayerAnimations>().GetHit();
         playerCurrentHealth -= damage;
         print(damage);
-        print(playerCurrentHealth);
         GetComponent<PlayerShootingSystem>().StopAiming();
     }
 
