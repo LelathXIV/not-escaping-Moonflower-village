@@ -17,13 +17,13 @@ public class QuestColliders : MonoBehaviour
     float timeBeforeSuicide;
     public List<GameObject> rewards;
 
-    private void Start()
+    private void OnEnable()
     {
         anim = targetObject.GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         for (int i = 0; i < SaveGameManager.CurrentSaveData._questCollidersSaveDatas.Count; i++)
         {
-            if (SaveGameManager.CurrentSaveData._questCollidersSaveDatas[i].finalPosition == transform.position &&
+            if (SaveGameManager.CurrentSaveData._questCollidersSaveDatas[i].fullName == transform.name + transform.parent.name &&
                 SaveGameManager.CurrentSaveData._questCollidersSaveDatas[i].expectedItemUsed == true)
             {
                 anim.speed = 10;
@@ -60,6 +60,7 @@ public class QuestColliders : MonoBehaviour
         {
             playerZoom.zoomUI.gameObject.SetActive(false);
         }
+        print("found myself");
         StartCoroutine(Suicide());
     }
 
@@ -93,7 +94,7 @@ public class QuestColliders : MonoBehaviour
     public void SaveQuestColliderData()
     {
         var QuestCollidersSave = new QuestCollidersSaveData();
-        QuestCollidersSave.finalPosition = transform.position;
+        QuestCollidersSave.fullName = transform.name + transform.parent.name;
         QuestCollidersSave.expectedItemUsed = expectedItemUsed;
         SaveGameManager.CurrentSaveData._questCollidersSaveDatas.Add(QuestCollidersSave);
         SaveGameManager.SaveGame();
@@ -104,5 +105,5 @@ public class QuestColliders : MonoBehaviour
 public class QuestCollidersSaveData
 {
     public bool expectedItemUsed;
-    public Vector3 finalPosition;
+    public string fullName;
 }

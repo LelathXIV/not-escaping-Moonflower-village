@@ -7,17 +7,17 @@ public class OpenObject : MonoBehaviour
     //objects for one-click action
     public List<GameObject> rewards;
 
-    void Start()
+    private void OnEnable()
     {
         animator = gameObject.GetComponent<Animator>();
-
         for (int i = 0; i < SaveGameManager.CurrentSaveData._openableObjects.Count; i++)
         {
-            if (SaveGameManager.CurrentSaveData._openableObjects[i].objectPosition == transform.position &&
+            if (SaveGameManager.CurrentSaveData._openableObjects[i].fullName == transform.name + transform.parent.name &&
                 SaveGameManager.CurrentSaveData._openableObjects[i].activated == true)
             {
-                ShowRewards();
+                animator.speed = 10;
                 animator.SetTrigger("Active");
+                print("found myself");
             }
         }
     }
@@ -45,7 +45,7 @@ public class OpenObject : MonoBehaviour
         var saveExists = false;
         for (int i = 0; i < SaveGameManager.CurrentSaveData._openableObjects.Count; i++)
         {
-            if (SaveGameManager.CurrentSaveData._openableObjects[i].objectPosition == transform.position)
+            if (SaveGameManager.CurrentSaveData._openableObjects[i].fullName == transform.name + transform.parent.name)
             {
                 saveExists = true;
             }
@@ -54,7 +54,7 @@ public class OpenObject : MonoBehaviour
         {
             var SavedObject = new OpenableObjects();
             SavedObject.activated = true;
-            SavedObject.objectPosition = transform.position;
+            SavedObject.fullName = transform.name + transform.parent.name;
             SaveGameManager.CurrentSaveData._openableObjects.Add(SavedObject);
             SaveGameManager.SaveGame();
         }
@@ -65,5 +65,5 @@ public class OpenObject : MonoBehaviour
 public class OpenableObjects
 {
     public bool activated;
-    public Vector3 objectPosition;
+    public string fullName;
 }

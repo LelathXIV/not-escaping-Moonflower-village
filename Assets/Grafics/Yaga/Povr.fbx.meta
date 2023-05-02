@@ -1,44 +1,8 @@
 fileFormatVersion: 2
-guid: 7b95094efeca95d4d9aad3eabd83176a
+guid: 42a064c38408612458b380bf1283372d
 ModelImporter:
-  serializedVersion: 20200
-  internalIDToNameTable:
-  - first:
-      74: 4781951162920444690
-    second: Armature|ArmatureAction
-  - first:
-      74: 4723146814002874508
-    second: Armature|Attack
-  - first:
-      74: -982115091633673366
-    second: Armature|Death
-  - first:
-      74: 5146612350387128030
-    second: Armature|Faceplant
-  - first:
-      74: -2065775210875148712
-    second: Armature|Fly
-  - first:
-      74: 4437589461327098638
-    second: Armature|inspect
-  - first:
-      74: -959535966383322633
-    second: Armature|Nothing
-  - first:
-      74: 4733286433499938339
-    second: Armature|Rise
-  - first:
-      74: 1303299601406483602
-    second: Armature|run
-  - first:
-      74: 7117818808369728425
-    second: Armature|Takehit
-  - first:
-      74: -6008670168507872027
-    second: Armature|Thrash
-  - first:
-      74: 8349542763059015795
-    second: Armature|Walk
+  serializedVersion: 21300
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -50,6 +14,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -79,6 +44,7 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -90,6 +56,7 @@ ModelImporter:
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
+    optimizeBones: 1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
@@ -132,6 +99,7 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

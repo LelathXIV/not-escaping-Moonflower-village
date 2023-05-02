@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Policy;
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
 
 public class AncientLock_MiniGame : MonoBehaviour
 {

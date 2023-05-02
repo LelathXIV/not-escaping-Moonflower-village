@@ -1,7 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using Zenject.SpaceFighter;
-using static UnityEditor.Progress;
 
 public class LukomorieFlowerEnemy : MonoBehaviour
 {

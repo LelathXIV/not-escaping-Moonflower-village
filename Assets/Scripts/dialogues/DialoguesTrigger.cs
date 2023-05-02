@@ -10,14 +10,14 @@ public class DialoguesTrigger : MonoBehaviour
     public bool isFinished;
     public List<string> dialogueLines;
 
-    private void Start()
+    private void OnEnable()
     {
         var saves = SaveGameManager.CurrentSaveData._dialogueTriggersSaveData;
         for (int i = 0; i < saves.Count; i++)
         {
-            if (saves[i].coordinates == this.transform.position && !isRepeatable && saves[i].isFinished)
+            if (saves[i].coordinates == transform.position && !isRepeatable && saves[i].isFinished)
             {
-                Destroy(this.gameObject);
+                Destroy(gameObject);
             }
         }
     }
@@ -26,13 +26,16 @@ public class DialoguesTrigger : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            inventoryUI.SetActive(false);
-            dialogUI.SetActive(true);
-            dialogUI.gameObject.GetComponent<DialogueScript>().lines = dialogueLines;
-            dialogUI.gameObject.GetComponent<DialogueScript>().StartDialogue();
-            isFinished = true;
-            gameObject.SetActive(false);
-            SaveTriggerInfo();
+            if(other.GetComponent<BattleMode>().isInBattle == false)
+            {
+                inventoryUI.SetActive(false);
+                dialogUI.SetActive(true);
+                dialogUI.gameObject.GetComponent<DialogueScript>().lines = dialogueLines;
+                dialogUI.gameObject.GetComponent<DialogueScript>().StartDialogue();
+                isFinished = true;
+                gameObject.SetActive(false);
+                SaveTriggerInfo();
+            }
         }
     }
 

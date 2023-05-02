@@ -72,5 +72,4 @@ public class StoryTriggers_area : MonoBehaviour
       GameObject.Destroy(GetComponent<StoryTriggers_area>());
       SaveGameManager.SaveGame();
   }
-
 }

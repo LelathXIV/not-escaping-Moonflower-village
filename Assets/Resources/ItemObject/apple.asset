@@ -19,7 +19,7 @@ MonoBehaviour:
   description: Smells delicious, restores health.
   sellPrice: 0
   buyPrice: 0
-  healingPotential: 15
+  healingPotential: 35
   bulletPrefab: {fileID: 0}
   bulletItem: {fileID: 0}
   damageValue: 0

@@ -81,6 +81,11 @@ public class InventoryItemAction : MonoBehaviour
             case ItemType.questObject:
                 useObjectButton.gameObject.SetActive(false);
                 break;
+            case ItemType.consumable:
+                useObjectButton.gameObject.SetActive(true);
+                var Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+                Player.playerCurrentHealth += item.healingPotential;
+                break;
         }
         useObjectButton.gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
     }
@@ -107,13 +112,11 @@ public class InventoryItemAction : MonoBehaviour
                                  "Sell price:   " + item.sellPrice
                                  ).ToString();
                 contextButtontext = "Equip";
-
                 break;
             case ItemType.treasure:
                 //description
                 break;
             case ItemType.questObject:
-                contextButtontext = "Use";
                 break;
             case ItemType.document:
                 //description

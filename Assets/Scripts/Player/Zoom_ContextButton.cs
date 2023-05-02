@@ -30,10 +30,13 @@ public class Zoom_ContextButton : MonoBehaviour
         //entering zoom zone
         if(other.tag == "zoomZone")
         {
-            ContextImag_zoomIn.gameObject.SetActive(true);
-            zoomCamera = other.transform.Find("Camera").gameObject;
-            currentSceneCamera = gameObject.GetComponent<PlayerController>().activeCamera;
-            btn.onClick.AddListener(TurnZoomOn);
+            if(GetComponent<BattleMode>().isInBattle == false)
+            {
+                ContextImag_zoomIn.gameObject.SetActive(true);
+                zoomCamera = other.transform.Find("Camera").gameObject;
+                currentSceneCamera = gameObject.GetComponent<PlayerController>().activeCamera;
+                btn.onClick.AddListener(TurnZoomOn);
+            }
         }
         
     }

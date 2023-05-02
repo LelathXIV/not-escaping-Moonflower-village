@@ -7,10 +7,7 @@ using TMPro;
 public class JournalDisplayer : MonoBehaviour
 {
     public GameObject journal;
-    public GameObject StatsButton;
-    public GameObject FacesButton;
-    public GameObject StoryButton;
-    public GameObject CluesButton;
+    public GameObject Main;
     public GameObject previousPage;
     public GameObject nextPage;
     public GameObject allDisplayedTexts;
@@ -19,10 +16,12 @@ public class JournalDisplayer : MonoBehaviour
     public Journal_Page currentJournalPage;
     public List<Journal_Page> listOfAllStoryPages;
 
-    private void Awake()
+    private void OnEnable()
     {
         listOfAllStoryPages = GameObject.FindGameObjectWithTag("journal").GetComponent<Journal>().listOfStoryPages;
+        StoryPages();
     }
+
     public void StoryPages()
     {
         for (int i = 0; i < listOfAllStoryPages.Count; i++)

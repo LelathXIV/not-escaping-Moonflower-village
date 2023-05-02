@@ -12,8 +12,11 @@ public class TurnOnOffLocations : MonoBehaviour
     {
         foreach (Transform location in locationObjectsParent)
         {
-            location.gameObject.SetActive(false);
-            allLocations.Add(location.gameObject);
+            if(location != null)
+            {
+                location.gameObject.SetActive(false);
+                allLocations.Add(location.gameObject);
+            }
         }
     }
 
@@ -34,7 +37,7 @@ public class TurnOnOffLocations : MonoBehaviour
             {
                 for (int x = 0; x < toTurnOn.Count; x++)
                 {
-                    if (allLocations[i] == toTurnOn[x])
+                    if (allLocations[i] == toTurnOn[x] && toTurnOn[x] != null)
                     {
                         toTurnOn[x].SetActive(true);
                     }

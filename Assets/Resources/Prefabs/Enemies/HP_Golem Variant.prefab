@@ -881,6 +881,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyMaxHealth: 250
   enemyCurrentHealth: 250
+  rewards:
+  - {fileID: 3575165329491708759, guid: ab05d87f22cfbb047a09d8e1a9a9f19b, type: 3}
+  - {fileID: 3575165329491708759, guid: 7b33bbd123079ec4cad334e3e32981c9, type: 3}
+  - {fileID: 3575165329491708759, guid: 61de6d4fbe020994c9b3bb97386c3e97, type: 3}
 --- !u!114 &8927277255539578023
 MonoBehaviour:
   m_ObjectHideFlags: 0

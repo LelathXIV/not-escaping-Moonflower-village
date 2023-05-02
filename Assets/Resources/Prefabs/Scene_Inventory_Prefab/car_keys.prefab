@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: e40a9e9567225454bbec25f39159df7c, type: 2}
   playerInventory: {fileID: 11400000, guid: 92a7cc49036b4274bb7c86b4e891b2ec, type: 2}
-  amount: 250
+  amount: 1
   pickedItemPanel: {fileID: 7805411449945313508, guid: a6a2ffb6564a23644869a9d183b2451a, type: 3}
   canvas: {fileID: 0}
 --- !u!114 &-282182949713715121

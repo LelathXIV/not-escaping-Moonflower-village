@@ -19,7 +19,7 @@ MonoBehaviour:
   description: 
   sellPrice: 0
   buyPrice: 0
-  healingPotential: 25
+  healingPotential: 50
   bulletPrefab: {fileID: 0}
   bulletItem: {fileID: 0}
   damageValue: 0
