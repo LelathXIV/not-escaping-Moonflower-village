@@ -18,7 +18,7 @@ public class OpenDoor : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    private void Start()
+    private void OnEnable()
     {
         var doorsData = SaveGameManager.CurrentSaveData._doorsSaveData;
         for (int i = 0; i < doorsData.Count; i++)

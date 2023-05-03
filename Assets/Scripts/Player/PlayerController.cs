@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -56,8 +54,8 @@ public class PlayerController : MonoBehaviour
                 right = Vector3.Cross(Vector3.up, activeCamera.transform.forward);
                 forward = Vector3.Cross(right, Vector3.up);
             }
-            move = (right * movementInput.x) + (forward * movementInput.y);
             //camera recalculations - correcting axises
+            move = (right * movementInput.x) + (forward * movementInput.y);
 
             if (move != Vector3.zero )
             {
@@ -71,7 +69,7 @@ public class PlayerController : MonoBehaviour
             {
                 playerAnimations.Idle();
 
-                if (battleMode.isInBattle == true && battleMode.EnemyInFront())
+                if (battleMode.isInBattle == true)
                 {
                     battleMode.LookAtTargetEnemy();
                 }

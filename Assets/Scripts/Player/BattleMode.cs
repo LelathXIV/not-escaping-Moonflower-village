@@ -21,7 +21,7 @@ public class BattleMode : MonoBehaviour
         {
             isInBattle = true;
             FindNearestEnemy();
-            EnemyInFront();
+           // EnemyInFront();
         }
     }
 
@@ -48,16 +48,16 @@ public class BattleMode : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * damping);
     }
 
-    public bool EnemyInFront()
-    {
-        Vector3 directionOfEnemy = transform.position - enemy.transform.position;
-        float angle = Vector3.Angle(transform.forward, directionOfEnemy);
-
-        if (Mathf.Abs(angle) > 90 && Mathf.Abs(angle) < 270)
-        {
-            Debug.DrawLine(transform.position, enemy.transform.position, Color.green);
-            return true;
-        }
-        return false;
-    }
+  //public bool EnemyInFront()
+  //{
+  //    Vector3 directionOfEnemy = transform.position - enemy.transform.position;
+  //    float angle = Vector3.Angle(transform.forward, directionOfEnemy);
+  //
+  //    if (Mathf.Abs(angle) > 90 && Mathf.Abs(angle) < 270)
+  //    {
+  //        Debug.DrawLine(transform.position, enemy.transform.position, Color.green);
+  //        return true;
+  //    }
+  //    return false;
+  //}
 }

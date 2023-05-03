@@ -33,15 +33,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 84de55e9ccd03e042946f43883f9db69, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -334.86
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 84de55e9ccd03e042946f43883f9db69, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.9599972
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 84de55e9ccd03e042946f43883f9db69, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.61
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 84de55e9ccd03e042946f43883f9db69, type: 3}
       propertyPath: m_LocalRotation.w
@@ -682,6 +682,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 84de55e9ccd03e042946f43883f9db69, type: 3}
   m_PrefabInstance: {fileID: 5161525306577430910}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &-724204330147965075
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5431343601855599663}
+  serializedVersion: 2
+  m_Mass: 250
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!95 &433865770
 Animator:
   serializedVersion: 5
